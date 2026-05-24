@@ -63,10 +63,16 @@ export default function TFunFestival() {
   const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
+  const scrollTo = useCallback((id) => {
+    setMenuOpen(false);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   const navLinks = [
-    { href: "#lineup", label: t.nav.lineup, isAnchor: true },
-    { href: "#info", label: t.nav.info, isAnchor: true },
-    { href: "#credits", label: t.nav.credits, isAnchor: true },
+    { id: "lineup", label: t.nav.lineup },
+    { id: "info", label: t.nav.info },
+    { id: "credits", label: t.nav.credits },
   ];
 
   return (
@@ -84,7 +90,12 @@ export default function TFunFestival() {
           display: "flex", alignItems: "center", justifyContent: "space-between",
         }}
       >
-        <a href="#hero" style={{ textDecoration: "none" }}>
+        <button
+          onClick={() => scrollTo("hero")}
+          style={{
+            background: "none", border: "none", cursor: "pointer", padding: 0,
+          }}
+        >
           <span style={{
             fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 22,
             letterSpacing: "-0.5px",
@@ -93,18 +104,22 @@ export default function TFunFestival() {
           }}>
             T FUN
           </span>
-        </a>
+        </button>
 
         <div className="nav-links-desktop" style={{ display: "flex", gap: 32, alignItems: "center" }}>
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <button
+              key={link.id}
+              onClick={() => scrollTo(link.id)}
               className="nav-link"
-              style={{ color: scrolled ? "var(--black)" : "var(--white)" }}
+              style={{
+                color: scrolled ? "var(--black)" : "var(--white)",
+                background: "none", border: "none", cursor: "pointer",
+                font: "inherit",
+              }}
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </div>
 
@@ -139,9 +154,17 @@ export default function TFunFestival() {
       {/* ─── MOBILE MENU OVERLAY ─── */}
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         {navLinks.map((link) => (
-          <a key={link.href} href={link.href} onClick={closeMenu}>
+          <button
+            key={link.id}
+            onClick={() => scrollTo(link.id)}
+            style={{
+              background: "none", border: "none", cursor: "pointer",
+              color: "var(--white)", font: "inherit",
+              fontSize: 32, fontWeight: 500, letterSpacing: "-0.5px",
+            }}
+          >
             {link.label}
-          </a>
+          </button>
         ))}
       </div>
 
@@ -241,17 +264,6 @@ export default function TFunFestival() {
             </p>
           </div>
 
-          <a
-            href="#lineup"
-            className="pill-btn pill-btn-ghost"
-            style={{
-              padding: "14px 40px", fontSize: 16, fontWeight: 480,
-              textDecoration: "none",
-              animation: "fadeInUp 0.8s ease 0.6s both",
-            }}
-          >
-            {t.hero.cta}
-          </a>
         </div>
 
         <div style={{
@@ -263,27 +275,6 @@ export default function TFunFestival() {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="6 9 12 15 18 9" />
           </svg>
-        </div>
-      </section>
-
-      {/* ─── POSTER ─── */}
-      <section style={{
-        background: "var(--black)",
-        padding: "80px 24px",
-        display: "flex",
-        justifyContent: "center",
-      }}>
-        <div style={{ maxWidth: 900, width: "100%" }}>
-          <img
-            src={import.meta.env.BASE_URL + "tfunpost.png"}
-            alt="T FUN 音樂祭海報"
-            style={{
-              width: "100%",
-              height: "auto",
-              borderRadius: 12,
-              boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
-            }}
-          />
         </div>
       </section>
 
@@ -386,6 +377,27 @@ export default function TFunFestival() {
         </div>
       </section>
 
+      {/* ─── POSTER ─── */}
+      <section style={{
+        background: "var(--black)",
+        padding: "0 24px 80px",
+        display: "flex",
+        justifyContent: "center",
+      }}>
+        <div style={{ maxWidth: 900, width: "100%" }}>
+          <img
+            src={import.meta.env.BASE_URL + "tfunpost.png"}
+            alt="T FUN 音樂祭海報"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: 12,
+              boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
+            }}
+          />
+        </div>
+      </section>
+
       {/* ─── INFO ─── */}
       <section id="info" style={{
         background: "var(--white)", color: "var(--black)",
@@ -418,41 +430,53 @@ export default function TFunFestival() {
               {
                 label: t.info.dateLabel,
                 value: t.info.dateValue,
+                color: "#39FF14",
                 icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                    <circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none" />
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="3" fill="#39FF14" opacity="0.15" />
+                    <rect x="3" y="4" width="18" height="18" rx="3" stroke="#39FF14" strokeWidth="1.5" />
+                    <rect x="3" y="4" width="18" height="8" rx="3" fill="#39FF14" opacity="0.3" />
+                    <line x1="16" y1="2" x2="16" y2="6" stroke="#39FF14" strokeWidth="2" />
+                    <line x1="8" y1="2" x2="8" y2="6" stroke="#39FF14" strokeWidth="2" />
+                    <text x="12" y="19" textAnchor="middle" fill="#39FF14" fontSize="7" fontWeight="700" fontFamily="system-ui">25</text>
                   </svg>
                 ),
               },
               {
                 label: t.info.venueLabel,
                 value: t.info.venueValue,
+                color: "#FF69B4",
                 icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                    <circle cx="12" cy="9" r="2.5" />
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#FF69B4" opacity="0.15" stroke="#FF69B4" strokeWidth="1.5" />
+                    <circle cx="12" cy="9" r="3" fill="#FF69B4" opacity="0.4" />
+                    <circle cx="12" cy="9" r="1.5" fill="#FF69B4" />
                   </svg>
                 ),
               },
               {
                 label: t.info.addressLabel,
                 value: t.info.addressValue,
+                color: "#00FFFF",
                 icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 21h18" />
-                    <path d="M5 21V7l7-4 7 4v14" />
-                    <rect x="9" y="13" width="6" height="8" />
-                    <line x1="12" y1="9" x2="12" y2="11" />
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="4" y="8" width="16" height="14" rx="2" fill="#00FFFF" opacity="0.1" stroke="#00FFFF" strokeWidth="1.5" />
+                    <path d="M4 8l8-5 8 5" stroke="#00FFFF" strokeWidth="1.5" fill="#00FFFF" opacity="0.2" />
+                    <rect x="9" y="14" width="6" height="8" rx="1" fill="#00FFFF" opacity="0.3" />
                   </svg>
                 ),
               },
             ].map((item) => (
               <div key={item.label} className="info-card" style={{ textAlign: "center" }}>
-                <div style={{ marginBottom: 16, opacity: 0.4 }}>{item.icon}</div>
+                <div style={{
+                  marginBottom: 20,
+                  width: 64, height: 64,
+                  borderRadius: 16,
+                  background: `${item.color}0A`,
+                  border: `1px solid ${item.color}20`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  margin: "0 auto 20px",
+                }}>{item.icon}</div>
                 <span className="mono-label" style={{
                   display: "block", marginBottom: 12, opacity: 0.4,
                 }}>

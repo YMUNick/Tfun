@@ -111,7 +111,7 @@ export const bands = [
   },
   {
     id: 4,
-    name: "毓峯 x8",
+    name: "毓峯",
     genre: "DANCE",
     members: {
       zh: "毓峯 ／ 安 ／ Dio ／ Lynn ／ Ty ／ Winnie ／ Sun ／ 得瑋 — 熱舞社",
