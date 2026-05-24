@@ -114,8 +114,8 @@ export const bands = [
     name: "毓峯 x8",
     genre: "DANCE",
     members: {
-      zh: "Lynn / Sun / Dio — 熱舞社",
-      en: "Lynn / Sun / Dio — Dance Crew",
+      zh: "毓峯 ／ 安 ／ Dio ／ Lynn ／ Ty ／ Winnie ／ Sun ／ 得瑋 — 熱舞社",
+      en: "Yu-Feng / An / Dio / Lynn / Ty / Winnie / Sun / De-Wei — Dance Crew",
     },
     songs: [],
     color: "#BF00FF",

@@ -266,6 +266,27 @@ export default function TFunFestival() {
         </div>
       </section>
 
+      {/* ─── POSTER ─── */}
+      <section style={{
+        background: "var(--black)",
+        padding: "80px 24px",
+        display: "flex",
+        justifyContent: "center",
+      }}>
+        <div style={{ maxWidth: 900, width: "100%" }}>
+          <img
+            src={import.meta.env.BASE_URL + "tfunpost.png"}
+            alt="T FUN 音樂祭海報"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: 12,
+              boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
+            }}
+          />
+        </div>
+      </section>
+
       {/* ─── LINEUP — Horizontal Scroll Strip ─── */}
       <section id="lineup" style={{ background: "var(--black)", overflow: "hidden" }}>
         <div
