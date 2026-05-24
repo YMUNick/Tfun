@@ -1,0 +1,179 @@
+export const i18n = {
+  zh: {
+    nav: { lineup: "演出陣容", info: "活動資訊", credits: "工作人員" },
+    hero: {
+      title: "TAIWANESE FUN",
+      titleShort: "T FUN",
+      subtitle: "音樂祭",
+      date: "2026 / 07 / 25（六）14:00 開始",
+      venue: "GR.iD Singapore",
+      address: "1 Selegie Road, B1-06, 188306",
+      cta: "查看陣容",
+    },
+    lineup: {
+      sectionLabel: "LINEUP",
+      sectionTitle: "演出陣容",
+      members: "成員",
+      songs: "演出曲目",
+      viewAll: "查看完整陣容",
+      back: "返回首頁",
+    },
+    info: {
+      sectionLabel: "INFO",
+      sectionTitle: "活動資訊",
+      dateLabel: "日期",
+      dateValue: "2026 年 7 月 25 日（週六）14:00 開始",
+      venueLabel: "地點",
+      venueValue: "GR.iD Singapore",
+      addressLabel: "地址",
+      addressValue: "1 Selegie Road, B1-06, 188306",
+      mapLink: "在 Google Maps 中開啟",
+    },
+    credits: {
+      sectionLabel: "CREDITS",
+      sectionTitle: "工作人員",
+    },
+    menu: "選單",
+    lang: "EN",
+  },
+  en: {
+    nav: { lineup: "Lineup", info: "Info", credits: "Credits" },
+    hero: {
+      title: "TAIWANESE FUN",
+      titleShort: "T FUN",
+      subtitle: "MUSIC FEST",
+      date: "2026 / 07 / 25 (SAT) from 2:00 PM",
+      venue: "GR.iD Singapore",
+      address: "1 Selegie Road, B1-06, 188306",
+      cta: "View Lineup",
+    },
+    lineup: {
+      sectionLabel: "LINEUP",
+      sectionTitle: "Performing Artists",
+      members: "Members",
+      songs: "Setlist",
+      viewAll: "View Full Lineup",
+      back: "Back to Home",
+    },
+    info: {
+      sectionLabel: "INFO",
+      sectionTitle: "Event Info",
+      dateLabel: "Date",
+      dateValue: "July 25, 2026 (Saturday) from 2:00 PM",
+      venueLabel: "Venue",
+      venueValue: "GR.iD Singapore",
+      addressLabel: "Address",
+      addressValue: "1 Selegie Road, B1-06, 188306",
+      mapLink: "Open in Google Maps",
+    },
+    credits: {
+      sectionLabel: "CREDITS",
+      sectionTitle: "Staff",
+    },
+    menu: "Menu",
+    lang: "中",
+  },
+};
+
+export const bands = [
+  {
+    id: 1,
+    name: "Vivian",
+    genre: "M-POP / J-ROCK",
+    members: {
+      zh: "Vocal: Vivian ／ Bass: Nick ／ Guitar: Kaho ／ Drum: Vivian",
+      en: "Vocal: Vivian / Bass: Nick / Guitar: Kaho / Drum: Vivian",
+    },
+    songs: ["浪子回頭", "灌籃高手 - 好想大聲說喜歡你", "Without You"],
+    color: "#39FF14",
+  },
+  {
+    id: 2,
+    name: "Jamie",
+    genre: "MANDOPOP",
+    members: {
+      zh: "Vocal: Jamie ／ Guitar: Darren ／ Drum: Aries",
+      en: "Vocal: Jamie / Guitar: Darren / Drum: Aries",
+    },
+    songs: [],
+    color: "#FFFF00",
+  },
+  {
+    id: 3,
+    name: "Frida",
+    genre: "MANDOPOP",
+    members: {
+      zh: "Vocal: Frida ／ Bass: Rui-Yi ／ Guitar: 鎮宇",
+      en: "Vocal: Frida / Bass: Rui-Yi / Guitar: Zhen-Yu",
+    },
+    songs: [],
+    color: "#FF69B4",
+  },
+  {
+    id: 4,
+    name: "毓峯 x8",
+    genre: "DANCE",
+    members: {
+      zh: "Lynn / Sun / Dio — 熱舞社",
+      en: "Lynn / Sun / Dio — Dance Crew",
+    },
+    songs: [],
+    color: "#BF00FF",
+  },
+  {
+    id: 5,
+    name: "Swenson x5",
+    genre: "STRINGS",
+    members: {
+      zh: "小提琴五重奏",
+      en: "Violin Quintet",
+    },
+    songs: ["卡農 (Canon)"],
+    color: "#00FFFF",
+  },
+  {
+    id: 6,
+    name: "PASH",
+    genre: "ORIGINAL",
+    members: {
+      zh: "Vocal: PASH ／ Guitar: Kaho",
+      en: "Vocal: PASH / Guitar: Kaho",
+    },
+    songs: [
+      "我是一隻鹹魚嗎？ Am I a Salted Fish?",
+      "有時 Sometimes",
+      "揮霍 Squandering",
+    ],
+    color: "#FF6600",
+  },
+  {
+    id: 7,
+    name: "Yanrong",
+    genre: "MANDOPOP",
+    members: {
+      zh: "Vocal: Yanrong ／ Guitar: Brian ／ Bass: Jason",
+      en: "Vocal: Yanrong / Guitar: Brian / Bass: Jason",
+    },
+    songs: ["A-Lin - 摯友", "理想混蛋 - 不是因為天氣晴朗才愛你", "F.I.R - 月牙灣"],
+    color: "#39FF14",
+  },
+  {
+    id: 8,
+    name: "Dean",
+    genre: "PUNK / POP",
+    members: {
+      zh: "Vocal: Dean（暫代）／ Guitar: Dean ／ Bass: Darren ／ Drum: Perry",
+      en: "Vocal: Dean (temp) / Guitar: Dean / Bass: Darren / Drum: Perry",
+    },
+    songs: [
+      "透明雜誌 - 時速160公里的吉他、BASS和鼓",
+      "拍謝少年 - 歹勢中年",
+      "Hi Standard - Dear My Friend",
+    ],
+    color: "#FF003C",
+  },
+];
+
+export const staff = [{ name: "Nick" }];
+
+export const noiseSVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")`;

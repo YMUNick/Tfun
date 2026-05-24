@@ -1,194 +1,17 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-
-// ─── i18n translations ───
-const i18n = {
-  zh: {
-    nav: { lineup: "演出陣容", info: "活動資訊", credits: "工作人員" },
-    hero: {
-      title: "TAIWANESE FUN",
-      titleShort: "T FUN",
-      subtitle: "音樂祭",
-      date: "2026 / 07 / 25（六）14:00 開始",
-      venue: "GR.iD Singapore",
-      address: "1 Selegie Road, B1-06, 188306",
-      cta: "查看陣容",
-    },
-    lineup: {
-      sectionLabel: "LINEUP",
-      sectionTitle: "演出陣容",
-      members: "成員",
-      songs: "演出曲目",
-    },
-    info: {
-      sectionLabel: "INFO",
-      sectionTitle: "活動資訊",
-      dateLabel: "日期",
-      dateValue: "2026 年 7 月 25 日（週六）14:00 開始",
-      venueLabel: "地點",
-      venueValue: "GR.iD Singapore",
-      addressLabel: "地址",
-      addressValue: "1 Selegie Road, B1-06, 188306",
-      mapLink: "在 Google Maps 中開啟",
-    },
-    credits: {
-      sectionLabel: "CREDITS",
-      sectionTitle: "工作人員",
-    },
-    menu: "選單",
-    lang: "EN",
-  },
-  en: {
-    nav: { lineup: "Lineup", info: "Info", credits: "Credits" },
-    hero: {
-      title: "TAIWANESE FUN",
-      titleShort: "T FUN",
-      subtitle: "MUSIC FEST",
-      date: "2026 / 07 / 25 (SAT) from 2:00 PM",
-      venue: "GR.iD Singapore",
-      address: "1 Selegie Road, B1-06, 188306",
-      cta: "View Lineup",
-    },
-    lineup: {
-      sectionLabel: "LINEUP",
-      sectionTitle: "Performing Artists",
-      members: "Members",
-      songs: "Setlist",
-    },
-    info: {
-      sectionLabel: "INFO",
-      sectionTitle: "Event Info",
-      dateLabel: "Date",
-      dateValue: "July 25, 2026 (Saturday) from 2:00 PM",
-      venueLabel: "Venue",
-      venueValue: "GR.iD Singapore",
-      addressLabel: "Address",
-      addressValue: "1 Selegie Road, B1-06, 188306",
-      mapLink: "Open in Google Maps",
-    },
-    credits: {
-      sectionLabel: "CREDITS",
-      sectionTitle: "Staff",
-    },
-    menu: "Menu",
-    lang: "中",
-  },
-};
-
-// ─── Band data ───
-const bands = [
-  {
-    id: 1,
-    name: "Vivian",
-    genre: "M-POP / J-ROCK",
-    members: {
-      zh: "Vocal: Vivian ／ Bass: Nick ／ Guitar: Kaho ／ Drum: Vivian",
-      en: "Vocal: Vivian / Bass: Nick / Guitar: Kaho / Drum: Vivian",
-    },
-    songs: ["浪子回頭", "灌籃高手 - 好想大聲說喜歡你", "Without You"],
-    color: "#39FF14",
-  },
-  {
-    id: 2,
-    name: "Jamie",
-    genre: "MANDOPOP",
-    members: {
-      zh: "Vocal: Jamie ／ Guitar: Darren ／ Drum: Aries",
-      en: "Vocal: Jamie / Guitar: Darren / Drum: Aries",
-    },
-    songs: [],
-    color: "#FFFF00",
-  },
-  {
-    id: 3,
-    name: "Frida",
-    genre: "MANDOPOP",
-    members: {
-      zh: "Vocal: Frida ／ Bass: Rui-Yi ／ Guitar: 鎮宇",
-      en: "Vocal: Frida / Bass: Rui-Yi / Guitar: Zhen-Yu",
-    },
-    songs: [],
-    color: "#FF69B4",
-  },
-  {
-    id: 4,
-    name: "毓峯 x8",
-    genre: "DANCE",
-    members: {
-      zh: "Lynn / Sun / Dio — 熱舞社",
-      en: "Lynn / Sun / Dio — Dance Crew",
-    },
-    songs: [],
-    color: "#BF00FF",
-  },
-  {
-    id: 5,
-    name: "Swenson x5",
-    genre: "STRINGS",
-    members: {
-      zh: "小提琴五重奏",
-      en: "Violin Quintet",
-    },
-    songs: ["卡農 (Canon)"],
-    color: "#00FFFF",
-  },
-  {
-    id: 6,
-    name: "PASH",
-    genre: "ORIGINAL",
-    members: {
-      zh: "Vocal: PASH ／ Guitar: Kaho",
-      en: "Vocal: PASH / Guitar: Kaho",
-    },
-    songs: [
-      "我是一隻鹹魚嗎？ Am I a Salted Fish?",
-      "有時 Sometimes",
-      "揮霍 Squandering",
-    ],
-    color: "#FF6600",
-  },
-  {
-    id: 7,
-    name: "Yanrong",
-    genre: "MANDOPOP",
-    members: {
-      zh: "Vocal: Yanrong ／ Guitar: Brian ／ Bass: Jason",
-      en: "Vocal: Yanrong / Guitar: Brian / Bass: Jason",
-    },
-    songs: ["A-Lin - 摯友", "理想混蛋 - 不是因為天氣晴朗才愛你", "F.I.R - 月牙灣"],
-    color: "#39FF14",
-  },
-  {
-    id: 8,
-    name: "Dean",
-    genre: "PUNK / POP",
-    members: {
-      zh: "Vocal: Dean（暫代）／ Guitar: Dean ／ Bass: Darren ／ Drum: Perry",
-      en: "Vocal: Dean (temp) / Guitar: Dean / Bass: Darren / Drum: Perry",
-    },
-    songs: [
-      "透明雜誌 - 時速160公里的吉他、BASS和鼓",
-      "拍謝少年 - 歹勢中年",
-      "Hi Standard - Dear My Friend",
-    ],
-    color: "#FF003C",
-  },
-];
-
-// ─── Staff ───
-const staff = [{ name: "Nick" }];
-
-// ─── Noise texture SVG for grain overlay ───
-const noiseSVG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")`;
+import { Link } from "react-router-dom";
+import { i18n, bands, staff, noiseSVG } from "./data";
 
 export default function TFunFestival() {
-  const [lang, setLang] = useState("zh");
+  const [lang, setLang] = useState(() => localStorage.getItem("tfun-lang") || "zh");
   const t = i18n[lang];
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [visibleCards, setVisibleCards] = useState(new Set());
   const [visibleSections, setVisibleSections] = useState(new Set());
-  const cardRefs = useRef([]);
   const sectionRefs = useRef({});
+  const scrollRef = useRef(null);
+  const isDragging = useRef(false);
+  const dragStart = useRef({ x: 0, scrollLeft: 0 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -196,29 +19,15 @@ export default function TFunFestival() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  // IntersectionObserver for band cards
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleCards((prev) => new Set([...prev, entry.target.dataset.id]));
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    cardRefs.current.forEach((ref) => ref && observer.observe(ref));
-    return () => observer.disconnect();
-  }, []);
+    localStorage.setItem("tfun-lang", lang);
+  }, [lang]);
 
-  // IntersectionObserver for section titles
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -234,227 +43,34 @@ export default function TFunFestival() {
     return () => observer.disconnect();
   }, []);
 
-  const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
+  // Drag-to-scroll for the horizontal strip
+  const onMouseDown = useCallback((e) => {
+    isDragging.current = true;
+    dragStart.current = { x: e.pageX, scrollLeft: scrollRef.current.scrollLeft };
+    scrollRef.current.style.cursor = "grabbing";
+  }, []);
+  const onMouseMove = useCallback((e) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const dx = e.pageX - dragStart.current.x;
+    scrollRef.current.scrollLeft = dragStart.current.scrollLeft - dx;
+  }, []);
+  const onMouseUp = useCallback(() => {
+    isDragging.current = false;
+    if (scrollRef.current) scrollRef.current.style.cursor = "grab";
+  }, []);
 
+  const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   const navLinks = [
-    { href: "#lineup", label: t.nav.lineup },
-    { href: "#info", label: t.nav.info },
-    { href: "#credits", label: t.nav.credits },
+    { href: "#lineup", label: t.nav.lineup, isAnchor: true },
+    { href: "#info", label: t.nav.info, isAnchor: true },
+    { href: "#credits", label: t.nav.credits, isAnchor: true },
   ];
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--white)", color: "var(--black)" }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-          --black: #000000;
-          --white: #ffffff;
-          --glass-dark: rgba(0,0,0,0.08);
-          --glass-light: rgba(255,255,255,0.16);
-          --font-sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-          --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
-        }
-
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-sans); background: var(--white); color: var(--black); overflow-x: hidden; }
-
-        .pill-btn {
-          display: inline-flex; align-items: center; justify-content: center;
-          border-radius: 50px; border: 2px solid var(--black);
-          font-family: var(--font-sans); font-weight: 480;
-          letter-spacing: -0.14px; cursor: pointer;
-          transition: all 0.2s ease;
-        }
-        .pill-btn:focus-visible {
-          outline: 2px dashed var(--black);
-          outline-offset: 3px;
-        }
-        .pill-btn-ghost {
-          background: var(--glass-light); color: var(--white); border-color: rgba(255,255,255,0.3);
-        }
-        .pill-btn-ghost:hover { background: rgba(255,255,255,0.25); }
-
-        .mono-label {
-          font-family: var(--font-mono);
-          font-size: 14px;
-          font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-          opacity: 0.6;
-        }
-
-        .section-title {
-          font-family: var(--font-sans);
-          font-size: clamp(36px, 6vw, 64px);
-          font-weight: 400;
-          letter-spacing: -0.96px;
-          line-height: 1.1;
-        }
-
-        .section-header {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .section-header.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        @keyframes pulseGlow {
-          0%, 100% { text-shadow: 0 0 20px rgba(57,255,20,0.3), 0 0 60px rgba(255,0,60,0.1); }
-          50% { text-shadow: 0 0 40px rgba(57,255,20,0.5), 0 0 80px rgba(255,105,180,0.2); }
-        }
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-          40% { transform: translateY(-8px) translateX(-50%); }
-          60% { transform: translateY(-4px) translateX(-50%); }
-        }
-
-        .band-card {
-          opacity: 0;
-          transform: translateY(40px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .band-card.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .band-card:hover {
-          transform: translateY(-4px) !important;
-          box-shadow: 0 12px 32px rgba(0,0,0,0.12);
-        }
-        .band-card:hover .card-glow {
-          opacity: 1;
-        }
-        .card-glow {
-          position: absolute; inset: -2px; border-radius: 10px;
-          opacity: 0; transition: opacity 0.4s ease;
-          pointer-events: none; z-index: 0;
-        }
-
-        .nav-link {
-          color: var(--black); text-decoration: none;
-          font-family: var(--font-sans); font-weight: 450;
-          font-size: 15px; letter-spacing: -0.14px;
-          position: relative; padding: 4px 0;
-        }
-        .nav-link::after {
-          content: ''; position: absolute; bottom: 0; left: 0;
-          width: 0; height: 1px; background: var(--black);
-          transition: width 0.3s ease;
-        }
-        .nav-link:hover::after { width: 100%; }
-        .nav-link:focus-visible { outline: 2px dashed var(--black); outline-offset: 3px; }
-
-        .info-card {
-          transition: transform 0.3s ease;
-        }
-        .info-card:hover {
-          transform: translateY(-4px);
-        }
-
-        /* ─── Mobile menu ─── */
-        .hamburger {
-          display: none;
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 8px;
-          z-index: 200;
-        }
-        .hamburger-line {
-          display: block;
-          width: 24px;
-          height: 2px;
-          margin: 5px 0;
-          transition: all 0.3s ease;
-        }
-        .hamburger.open .hamburger-line:nth-child(1) {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.open .hamburger-line:nth-child(2) {
-          opacity: 0;
-        }
-        .hamburger.open .hamburger-line:nth-child(3) {
-          transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        .mobile-menu {
-          position: fixed;
-          inset: 0;
-          background: rgba(0,0,0,0.97);
-          z-index: 150;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 40px;
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.35s ease;
-        }
-        .mobile-menu.open {
-          opacity: 1;
-          pointer-events: all;
-        }
-        .mobile-menu a {
-          color: var(--white);
-          text-decoration: none;
-          font-family: var(--font-sans);
-          font-size: 32px;
-          font-weight: 500;
-          letter-spacing: -0.5px;
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .mobile-menu.open a {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .mobile-menu.open a:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-menu.open a:nth-child(2) { transition-delay: 0.18s; }
-        .mobile-menu.open a:nth-child(3) { transition-delay: 0.26s; }
-
-        @media (max-width: 768px) {
-          .nav-links-desktop { display: none !important; }
-          .hamburger { display: block; }
-          .hero-title { font-size: 56px !important; }
-          .hero-subtitle { font-size: 28px !important; }
-          .bands-grid { grid-template-columns: 1fr !important; }
-          .info-grid { grid-template-columns: 1fr !important; }
-          .credits-list { flex-direction: column !important; align-items: center !important; }
-        }
-        @media (max-width: 480px) {
-          .hero-title { font-size: 42px !important; }
-          .hero-subtitle { font-size: 22px !important; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          *, *::before, *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
-          html { scroll-behavior: auto; }
-          .band-card, .section-header { opacity: 1; transform: none; }
-        }
-      `}</style>
 
       {/* ─── NAV ─── */}
       <nav
@@ -507,7 +123,6 @@ export default function TFunFestival() {
           >
             {t.lang}
           </button>
-
           <button
             className={`hamburger ${menuOpen ? "open" : ""}`}
             onClick={() => setMenuOpen((o) => !o)}
@@ -545,12 +160,10 @@ export default function TFunFestival() {
           textAlign: "center",
         }}
       >
-        {/* grain overlay */}
         <div style={{
           position: "absolute", inset: 0, backgroundImage: noiseSVG,
           backgroundRepeat: "repeat", opacity: 0.5, pointerEvents: "none",
         }} />
-        {/* dark overlay for readability */}
         <div style={{
           position: "absolute", inset: 0,
           background: "rgba(0,0,0,0.25)",
@@ -641,11 +254,8 @@ export default function TFunFestival() {
           </a>
         </div>
 
-        {/* Scroll indicator */}
         <div style={{
-          position: "absolute",
-          bottom: 32,
-          left: "50%",
+          position: "absolute", bottom: 32, left: "50%",
           transform: "translateX(-50%)",
           animation: "bounce 2s ease infinite, fadeInUp 0.8s ease 0.8s both",
           opacity: 0.6,
@@ -656,137 +266,108 @@ export default function TFunFestival() {
         </div>
       </section>
 
-      {/* ─── LINEUP ─── */}
-      <section id="lineup" style={{
-        padding: "120px 24px",
-        maxWidth: 1200, margin: "0 auto",
-      }}>
+      {/* ─── LINEUP — Horizontal Scroll Strip ─── */}
+      <section id="lineup" style={{ background: "var(--black)", overflow: "hidden" }}>
         <div
           ref={(el) => (sectionRefs.current.lineup = el)}
           data-section="lineup"
           className={`section-header ${visibleSections.has("lineup") ? "visible" : ""}`}
-          style={{ marginBottom: 64, textAlign: "center" }}
+          style={{ textAlign: "center", padding: "80px 24px 40px" }}
         >
-          <span className="mono-label" style={{ display: "block", marginBottom: 16 }}>
+          <span className="mono-label" style={{ display: "block", marginBottom: 16, color: "var(--white)", opacity: 0.5 }}>
             {t.lineup.sectionLabel}
           </span>
-          <h2 className="section-title">{t.lineup.sectionTitle}</h2>
+          <h2 className="section-title" style={{ color: "var(--white)" }}>{t.lineup.sectionTitle}</h2>
         </div>
 
         <div
-          className="bands-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
-            gap: 24,
-          }}
+          ref={scrollRef}
+          className="scroll-strip"
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseUp}
         >
-          {bands.map((band, i) => (
-            <div
+          {bands.map((band) => (
+            <Link
               key={band.id}
-              ref={(el) => (cardRefs.current[i] = el)}
-              data-id={String(band.id)}
-              className={`band-card ${visibleCards.has(String(band.id)) ? "visible" : ""}`}
-              style={{
-                position: "relative",
-                background: "var(--white)",
-                border: "1.5px solid var(--black)",
-                borderRadius: 8,
-                padding: 0,
-                overflow: "hidden",
-                transitionDelay: `${i * 0.08}s`,
-                cursor: "default",
-              }}
+              to="/lineup"
+              className="scroll-card"
+              draggable={false}
+              onClick={(e) => { if (isDragging.current) e.preventDefault(); }}
             >
-              <div
-                className="card-glow"
-                style={{
-                  background: `linear-gradient(135deg, ${band.color}44, transparent, ${band.color}22)`,
-                }}
-              />
-
+              {/* Color gradient background */}
               <div style={{
-                height: 4, background: band.color, position: "relative", zIndex: 1,
+                position: "absolute", inset: 0,
+                background: `linear-gradient(180deg, ${band.color}18 0%, ${band.color}50 100%)`,
+              }} />
+              {/* Bottom accent line */}
+              <div style={{
+                position: "absolute", bottom: 0, left: 0, right: 0,
+                height: 3, background: band.color,
               }} />
 
-              <div style={{ padding: "24px 28px", position: "relative", zIndex: 1 }}>
+              <div className="scroll-card-inner">
+                {/* Genre pill */}
                 <span style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 11, fontWeight: 500,
+                  fontSize: 10, fontWeight: 500,
                   textTransform: "uppercase",
                   letterSpacing: "1.5px",
-                  background: "var(--black)",
-                  color: "var(--white)",
-                  padding: "3px 10px",
-                  borderRadius: 50,
-                  display: "inline-block",
-                  marginBottom: 16,
+                  color: band.color,
+                  marginBottom: 12,
+                  display: "block",
                 }}>
                   {band.genre}
                 </span>
 
+                {/* Band name */}
                 <h3 style={{
                   fontFamily: "var(--font-sans)",
-                  fontSize: "clamp(28px, 4vw, 36px)",
+                  fontSize: "clamp(32px, 5vw, 44px)",
                   fontWeight: 700,
                   letterSpacing: "-0.5px",
-                  lineHeight: 1.1,
-                  marginBottom: 16,
-                  color: "var(--black)",
+                  lineHeight: 1.05,
+                  marginBottom: 12,
+                  color: "var(--white)",
                 }}>
                   {band.name}
                 </h3>
 
+                {/* Members preview */}
                 <p style={{
                   fontFamily: "var(--font-sans)",
-                  fontSize: 14, fontWeight: 340,
+                  fontSize: 13, fontWeight: 340,
                   letterSpacing: "-0.14px",
-                  lineHeight: 1.6,
-                  color: "var(--black)",
-                  opacity: 0.65,
-                  marginBottom: band.songs.length > 0 ? 20 : 0,
+                  lineHeight: 1.5,
+                  color: "var(--white)",
+                  opacity: 0.5,
                 }}>
                   {band.members[lang]}
                 </p>
-
-                {band.songs.length > 0 && (
-                  <div>
-                    <span className="mono-label" style={{
-                      fontSize: 11, display: "block", marginBottom: 8,
-                      letterSpacing: "1.5px",
-                    }}>
-                      {t.lineup.songs}
-                    </span>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                      {band.songs.map((song, si) => (
-                        <span
-                          key={si}
-                          style={{
-                            fontFamily: "var(--font-sans)",
-                            fontSize: 12, fontWeight: 450,
-                            letterSpacing: "-0.1px",
-                            padding: "4px 12px",
-                            borderRadius: 50,
-                            border: "1px solid rgba(0,0,0,0.15)",
-                            background: "rgba(0,0,0,0.03)",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {song}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
-            </div>
+            </Link>
           ))}
+        </div>
+
+        {/* View full lineup CTA */}
+        <div style={{ textAlign: "center", padding: "48px 24px 80px" }}>
+          <Link
+            to="/lineup"
+            className="pill-btn pill-btn-ghost"
+            style={{
+              padding: "12px 36px", fontSize: 15, fontWeight: 480,
+              textDecoration: "none",
+            }}
+          >
+            {t.lineup.viewAll} →
+          </Link>
         </div>
       </section>
 
       {/* ─── INFO ─── */}
       <section id="info" style={{
-        background: "var(--black)", color: "var(--white)",
+        background: "var(--white)", color: "var(--black)",
         padding: "120px 24px",
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -796,14 +377,10 @@ export default function TFunFestival() {
             className={`section-header ${visibleSections.has("info") ? "visible" : ""}`}
             style={{ marginBottom: 64, textAlign: "center" }}
           >
-            <span className="mono-label" style={{
-              display: "block", marginBottom: 16, color: "var(--white)", opacity: 0.5,
-            }}>
+            <span className="mono-label" style={{ display: "block", marginBottom: 16 }}>
               {t.info.sectionLabel}
             </span>
-            <h2 className="section-title" style={{ color: "var(--white)" }}>
-              {t.info.sectionTitle}
-            </h2>
+            <h2 className="section-title">{t.info.sectionTitle}</h2>
           </div>
 
           <div
@@ -854,10 +431,9 @@ export default function TFunFestival() {
               },
             ].map((item) => (
               <div key={item.label} className="info-card" style={{ textAlign: "center" }}>
-                <div style={{ marginBottom: 16, color: "var(--white)", opacity: 0.5 }}>{item.icon}</div>
+                <div style={{ marginBottom: 16, opacity: 0.4 }}>{item.icon}</div>
                 <span className="mono-label" style={{
-                  display: "block", marginBottom: 12,
-                  color: "var(--white)", opacity: 0.4,
+                  display: "block", marginBottom: 12, opacity: 0.4,
                 }}>
                   {item.label}
                 </span>
@@ -866,7 +442,6 @@ export default function TFunFestival() {
                   fontSize: 18, fontWeight: 340,
                   letterSpacing: "-0.14px",
                   lineHeight: 1.5,
-                  color: "var(--white)",
                 }}>
                   {item.value}
                 </p>
@@ -879,7 +454,7 @@ export default function TFunFestival() {
               href="https://maps.google.com/?q=GR.iD+Singapore+1+Selegie+Road+B1-06+188306"
               target="_blank"
               rel="noopener noreferrer"
-              className="pill-btn pill-btn-ghost"
+              className="pill-btn pill-btn-dark"
               style={{
                 padding: "12px 36px", fontSize: 15, fontWeight: 480,
                 textDecoration: "none",
@@ -902,9 +477,7 @@ export default function TFunFestival() {
             data-section="credits"
             className={`section-header ${visibleSections.has("credits") ? "visible" : ""}`}
           >
-            <span className="mono-label" style={{
-              display: "block", marginBottom: 16,
-            }}>
+            <span className="mono-label" style={{ display: "block", marginBottom: 16 }}>
               {t.credits.sectionLabel}
             </span>
             <h3 style={{
@@ -920,10 +493,8 @@ export default function TFunFestival() {
           <div
             className="credits-list"
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: "12px 24px",
+              display: "flex", flexWrap: "wrap",
+              justifyContent: "center", gap: "12px 24px",
             }}
           >
             {staff.map((s) => (
@@ -931,8 +502,7 @@ export default function TFunFestival() {
                 key={s.name}
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 14,
-                  fontWeight: 400,
+                  fontSize: 14, fontWeight: 400,
                   letterSpacing: "0.6px",
                   textTransform: "uppercase",
                   opacity: 0.5,
@@ -948,8 +518,7 @@ export default function TFunFestival() {
       {/* ─── FOOTER ─── */}
       <footer style={{
         background: "var(--black)", color: "var(--white)",
-        padding: "32px 24px",
-        textAlign: "center",
+        padding: "32px 24px", textAlign: "center",
       }}>
         <p style={{
           fontFamily: "var(--font-mono)",
