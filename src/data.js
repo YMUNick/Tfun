@@ -81,8 +81,8 @@ export const bands = [
     name: "Vivian",
     genre: "M-POP / J-ROCK",
     members: {
-      zh: "Vocal: Vivian ／ Bass: Nick ／ Guitar: Kaho ／ Drum: Vivian",
-      en: "Vocal: Vivian / Bass: Nick / Guitar: Kaho / Drum: Vivian",
+      zh: "Vocal: Nick ／ Guitar: Kaho ／ Drum: Vivian",
+      en: "Vocal: Nick / Guitar: Kaho / Drum: Vivian",
     },
     songs: ["浪子回頭", "灌籃高手 - 好想大聲說喜歡你", "Without You"],
     color: "#39FF14",
@@ -103,8 +103,8 @@ export const bands = [
     name: "Frida",
     genre: "MANDOPOP",
     members: {
-      zh: "Vocal: Frida ／ Bass: Rui-Yi ／ Guitar: 鎮宇",
-      en: "Vocal: Frida / Bass: Rui-Yi / Guitar: Zhen-Yu",
+      zh: "Vocal: Frida ／ Guitar: Rui-Yi ／ Others: 鎮宇",
+      en: "Vocal: Frida / Guitar: Rui-Yi / Others: Zhen-Yu",
     },
     songs: [],
     color: "#FF69B4",
@@ -151,8 +151,8 @@ export const bands = [
     name: "Yanrong",
     genre: "MANDOPOP",
     members: {
-      zh: "Vocal: Yanrong ／ Guitar: Brian ／ Bass: Jason",
-      en: "Vocal: Yanrong / Guitar: Brian / Bass: Jason",
+      zh: "Vocal: Yanrong ／ Guitar: Brian ／ Drum: Jason",
+      en: "Vocal: Yanrong / Guitar: Brian / Drum: Jason",
     },
     songs: ["A-Lin - 摯友", "理想混蛋 - 不是因為天氣晴朗才愛你", "F.I.R - 月牙灣"],
     color: "#39FF14",
@@ -162,8 +162,8 @@ export const bands = [
     name: "Dean",
     genre: "PUNK / POP",
     members: {
-      zh: "Vocal: Dean（暫代）／ Guitar: Dean ／ Bass: Darren ／ Drum: Perry",
-      en: "Vocal: Dean (temp) / Guitar: Dean / Bass: Darren / Drum: Perry",
+      zh: "Vocal: Dean（暫代）／ Bass: Dean ／ Guitar: Darren ／ Drum: Perry",
+      en: "Vocal: Dean (temp) / Bass: Dean / Guitar: Darren / Drum: Perry",
     },
     songs: [
       "透明雜誌 - 時速160公里的吉他、BASS和鼓",
