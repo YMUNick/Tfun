@@ -111,11 +111,11 @@ export const bands = [
   },
   {
     id: 4,
-    name: "毓峯",
+    name: "歹灣郎宮廟總會",
     genre: "DANCE",
     members: {
-      zh: "毓峯 ／ 安 ／ Dio ／ Lynn ／ Ty ／ Winnie ／ Sun ／ 得瑋 — 熱舞社",
-      en: "Yu-Feng / An / Dio / Lynn / Ty / Winnie / Sun / De-Wei — Dance Crew",
+      zh: "毓峯 ／ 安 ／ Dio ／ Lynn ／ Ty ／ Winney ／ Sun ／ 得瑋 — 熱舞社",
+      en: "Yu-Feng / An / Dio / Lynn / Ty / Winney / Sun / De-Wei — Dance Crew",
     },
     songs: [],
     color: "#BF00FF",
