@@ -292,74 +292,98 @@ export default function TFunFestival() {
           <h2 className="section-title" style={{ color: "var(--white)" }}>{t.lineup.sectionTitle}</h2>
         </div>
 
-        <div
-          ref={scrollRef}
-          className="scroll-strip"
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseUp}
-        >
-          {bands.map((band) => (
-            <Link
-              key={band.id}
-              to="/lineup"
-              className="scroll-card"
-              draggable={false}
-              onClick={(e) => { if (isDragging.current) e.preventDefault(); }}
-            >
-              {/* Color gradient background */}
-              <div style={{
-                position: "absolute", inset: 0,
-                background: `linear-gradient(180deg, ${band.color}18 0%, ${band.color}50 100%)`,
-              }} />
-              {/* Bottom accent line */}
-              <div style={{
-                position: "absolute", bottom: 0, left: 0, right: 0,
-                height: 3, background: band.color,
-              }} />
+        <div style={{ position: "relative" }}>
+          {/* Left arrow */}
+          <button
+            className="scroll-arrow scroll-arrow-left"
+            onClick={() => { scrollRef.current.scrollBy({ left: -320, behavior: "smooth" }); }}
+            aria-label="Scroll left"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
-              <div className="scroll-card-inner">
-                {/* Genre pill */}
-                <span style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 10, fontWeight: 500,
-                  textTransform: "uppercase",
-                  letterSpacing: "1.5px",
-                  color: band.color,
-                  marginBottom: 12,
-                  display: "block",
-                }}>
-                  {band.genre}
-                </span>
+          {/* Right arrow */}
+          <button
+            className="scroll-arrow scroll-arrow-right"
+            onClick={() => { scrollRef.current.scrollBy({ left: 320, behavior: "smooth" }); }}
+            aria-label="Scroll right"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
 
-                {/* Band name */}
-                <h3 style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "clamp(32px, 5vw, 44px)",
-                  fontWeight: 700,
-                  letterSpacing: "-0.5px",
-                  lineHeight: 1.05,
-                  marginBottom: 12,
-                  color: "var(--white)",
-                }}>
-                  {band.name}
-                </h3>
+          <div
+            ref={scrollRef}
+            className="scroll-strip"
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseUp}
+          >
+            {bands.map((band) => (
+              <Link
+                key={band.id}
+                to="/lineup"
+                className="scroll-card"
+                draggable={false}
+                onClick={(e) => { if (isDragging.current) e.preventDefault(); }}
+              >
+                {/* Color gradient background */}
+                <div style={{
+                  position: "absolute", inset: 0,
+                  background: `linear-gradient(180deg, ${band.color}18 0%, ${band.color}50 100%)`,
+                }} />
+                {/* Bottom accent line */}
+                <div style={{
+                  position: "absolute", bottom: 0, left: 0, right: 0,
+                  height: 3, background: band.color,
+                }} />
 
-                {/* Members preview */}
-                <p style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: 13, fontWeight: 340,
-                  letterSpacing: "-0.14px",
-                  lineHeight: 1.5,
-                  color: "var(--white)",
-                  opacity: 0.5,
-                }}>
-                  {band.members[lang]}
-                </p>
-              </div>
-            </Link>
-          ))}
+                <div className="scroll-card-inner">
+                  {/* Genre pill */}
+                  <span style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10, fontWeight: 500,
+                    textTransform: "uppercase",
+                    letterSpacing: "1.5px",
+                    color: band.color,
+                    marginBottom: 12,
+                    display: "block",
+                  }}>
+                    {band.genre}
+                  </span>
+
+                  {/* Band name */}
+                  <h3 style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: "clamp(32px, 5vw, 44px)",
+                    fontWeight: 700,
+                    letterSpacing: "-0.5px",
+                    lineHeight: 1.05,
+                    marginBottom: 12,
+                    color: "var(--white)",
+                  }}>
+                    {band.name}
+                  </h3>
+
+                  {/* Members preview */}
+                  <p style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 13, fontWeight: 340,
+                    letterSpacing: "-0.14px",
+                    lineHeight: 1.5,
+                    color: "var(--white)",
+                    opacity: 0.5,
+                  }}>
+                    {band.members[lang]}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* View full lineup CTA */}
@@ -400,9 +424,17 @@ export default function TFunFestival() {
 
       {/* ─── INFO ─── */}
       <section id="info" style={{
-        background: "var(--white)", color: "var(--black)",
+        background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
+        color: "var(--white)",
         padding: "120px 24px",
+        position: "relative",
       }}>
+        {/* Subtle gradient accent */}
+        <div style={{
+          position: "absolute", top: 0, left: 0, right: 0, height: 1,
+          background: "linear-gradient(90deg, #39FF14 0%, #FF69B4 50%, #00FFFF 100%)",
+          opacity: 0.4,
+        }} />
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div
             ref={(el) => (sectionRefs.current.info = el)}
@@ -410,10 +442,10 @@ export default function TFunFestival() {
             className={`section-header ${visibleSections.has("info") ? "visible" : ""}`}
             style={{ marginBottom: 64, textAlign: "center" }}
           >
-            <span className="mono-label" style={{ display: "block", marginBottom: 16 }}>
+            <span className="mono-label" style={{ display: "block", marginBottom: 16, color: "var(--white)", opacity: 0.4 }}>
               {t.info.sectionLabel}
             </span>
-            <h2 className="section-title">{t.info.sectionTitle}</h2>
+            <h2 className="section-title" style={{ color: "var(--white)" }}>{t.info.sectionTitle}</h2>
           </div>
 
           <div
@@ -478,7 +510,8 @@ export default function TFunFestival() {
                   margin: "0 auto 20px",
                 }}>{item.icon}</div>
                 <span className="mono-label" style={{
-                  display: "block", marginBottom: 12, opacity: 0.4,
+                  display: "block", marginBottom: 12, opacity: 0.35,
+                  color: "var(--white)",
                 }}>
                   {item.label}
                 </span>
@@ -487,6 +520,7 @@ export default function TFunFestival() {
                   fontSize: 18, fontWeight: 340,
                   letterSpacing: "-0.14px",
                   lineHeight: 1.5,
+                  color: "var(--white)",
                 }}>
                   {item.value}
                 </p>
@@ -499,7 +533,7 @@ export default function TFunFestival() {
               href="https://maps.google.com/?q=GR.iD+Singapore+1+Selegie+Road+B1-06+188306"
               target="_blank"
               rel="noopener noreferrer"
-              className="pill-btn pill-btn-dark"
+              className="pill-btn pill-btn-ghost"
               style={{
                 padding: "12px 36px", fontSize: 15, fontWeight: 480,
                 textDecoration: "none",
@@ -514,7 +548,8 @@ export default function TFunFestival() {
       {/* ─── CREDITS ─── */}
       <section id="credits" style={{
         padding: "80px 24px",
-        borderTop: "1px solid rgba(0,0,0,0.08)",
+        background: "#0d0d0d",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", textAlign: "center" }}>
           <div
@@ -522,7 +557,7 @@ export default function TFunFestival() {
             data-section="credits"
             className={`section-header ${visibleSections.has("credits") ? "visible" : ""}`}
           >
-            <span className="mono-label" style={{ display: "block", marginBottom: 16 }}>
+            <span className="mono-label" style={{ display: "block", marginBottom: 16, color: "var(--white)", opacity: 0.3 }}>
               {t.credits.sectionLabel}
             </span>
             <h3 style={{
@@ -530,6 +565,7 @@ export default function TFunFestival() {
               fontSize: 24, fontWeight: 400,
               letterSpacing: "-0.26px",
               marginBottom: 32,
+              color: "var(--white)",
             }}>
               {t.credits.sectionTitle}
             </h3>
@@ -550,7 +586,8 @@ export default function TFunFestival() {
                   fontSize: 14, fontWeight: 400,
                   letterSpacing: "0.6px",
                   textTransform: "uppercase",
-                  opacity: 0.5,
+                  opacity: 0.4,
+                  color: "var(--white)",
                 }}
               >
                 {s.name}
