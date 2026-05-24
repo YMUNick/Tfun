@@ -5,9 +5,10 @@ const i18n = {
   zh: {
     nav: { lineup: "演出陣容", info: "活動資訊", credits: "工作人員" },
     hero: {
-      title: "T FUN",
+      title: "TAIWANESE FUN",
+      titleShort: "T FUN",
       subtitle: "音樂祭",
-      date: "2026 / 07 / 25（六）",
+      date: "2026 / 07 / 25（六）14:00 開始",
       venue: "GR.iD Singapore",
       address: "1 Selegie Road, B1-06, 188306",
       cta: "查看陣容",
@@ -22,7 +23,7 @@ const i18n = {
       sectionLabel: "INFO",
       sectionTitle: "活動資訊",
       dateLabel: "日期",
-      dateValue: "2026 年 7 月 25 日（週六）",
+      dateValue: "2026 年 7 月 25 日（週六）14:00 開始",
       venueLabel: "地點",
       venueValue: "GR.iD Singapore",
       addressLabel: "地址",
@@ -39,9 +40,10 @@ const i18n = {
   en: {
     nav: { lineup: "Lineup", info: "Info", credits: "Credits" },
     hero: {
-      title: "T FUN",
+      title: "TAIWANESE FUN",
+      titleShort: "T FUN",
       subtitle: "MUSIC FEST",
-      date: "2026 / 07 / 25 (SAT)",
+      date: "2026 / 07 / 25 (SAT) from 2:00 PM",
       venue: "GR.iD Singapore",
       address: "1 Selegie Road, B1-06, 188306",
       cta: "View Lineup",
@@ -56,7 +58,7 @@ const i18n = {
       sectionLabel: "INFO",
       sectionTitle: "Event Info",
       dateLabel: "Date",
-      dateValue: "July 25, 2026 (Saturday)",
+      dateValue: "July 25, 2026 (Saturday) from 2:00 PM",
       venueLabel: "Venue",
       venueValue: "GR.iD Singapore",
       addressLabel: "Address",
@@ -567,16 +569,30 @@ export default function TFunFestival() {
             className="hero-title"
             style={{
               fontFamily: "var(--font-sans)",
-              fontSize: "clamp(56px, 14vw, 160px)",
               fontWeight: 700,
               color: "var(--white)",
-              letterSpacing: "-4px",
               lineHeight: 0.9,
               animation: "fadeInUp 0.8s ease 0.15s both, pulseGlow 4s ease infinite",
               marginBottom: 8,
             }}
           >
-            {t.hero.title}
+            <span style={{
+              display: "block",
+              fontSize: "clamp(20px, 4vw, 40px)",
+              letterSpacing: "4px",
+              fontWeight: 400,
+              opacity: 0.85,
+              marginBottom: 12,
+            }}>
+              {t.hero.title}
+            </span>
+            <span style={{
+              display: "block",
+              fontSize: "clamp(56px, 14vw, 160px)",
+              letterSpacing: "-4px",
+            }}>
+              {t.hero.titleShort}
+            </span>
           </h1>
 
           <h2
@@ -801,12 +817,44 @@ export default function TFunFestival() {
             }}
           >
             {[
-              { label: t.info.dateLabel, value: t.info.dateValue, icon: "📅" },
-              { label: t.info.venueLabel, value: t.info.venueValue, icon: "📍" },
-              { label: t.info.addressLabel, value: t.info.addressValue, icon: "🏢" },
+              {
+                label: t.info.dateLabel,
+                value: t.info.dateValue,
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                    <circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none" />
+                  </svg>
+                ),
+              },
+              {
+                label: t.info.venueLabel,
+                value: t.info.venueValue,
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                  </svg>
+                ),
+              },
+              {
+                label: t.info.addressLabel,
+                value: t.info.addressValue,
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 21h18" />
+                    <path d="M5 21V7l7-4 7 4v14" />
+                    <rect x="9" y="13" width="6" height="8" />
+                    <line x1="12" y1="9" x2="12" y2="11" />
+                  </svg>
+                ),
+              },
             ].map((item) => (
               <div key={item.label} className="info-card" style={{ textAlign: "center" }}>
-                <div style={{ fontSize: 32, marginBottom: 16 }}>{item.icon}</div>
+                <div style={{ marginBottom: 16, color: "var(--white)", opacity: 0.5 }}>{item.icon}</div>
                 <span className="mono-label" style={{
                   display: "block", marginBottom: 12,
                   color: "var(--white)", opacity: 0.4,
@@ -910,7 +958,7 @@ export default function TFunFestival() {
           textTransform: "uppercase",
           opacity: 0.35,
         }}>
-          T FUN MUSIC FEST — 2026
+          TAIWANESE FUN (T FUN) MUSIC FEST — 2026
         </p>
       </footer>
     </div>
