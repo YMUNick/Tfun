@@ -11,6 +11,8 @@ const guests = [
     genre: "ROCK",
     color: "#FF003C",
     image: BASE + "mayday.jpg",
+    tag: "沒有邀請",
+    tagEn: "Not Invited",
   },
   {
     name: "周杰倫",
@@ -18,6 +20,8 @@ const guests = [
     genre: "MANDOPOP / R&B",
     color: "#FFD700",
     image: BASE + "jay.jpg",
+    tag: "沒有經費",
+    tagEn: "No Budget",
   },
   {
     name: "美秀集團",
@@ -25,6 +29,8 @@ const guests = [
     genre: "INDIE ROCK",
     color: "#39FF14",
     image: BASE + "美秀.jpg",
+    tag: "肯定不會來",
+    tagEn: "Definitely Won't Come",
   },
 ];
 
@@ -232,7 +238,7 @@ export default function SecretGuests() {
                     border: "1px solid rgba(255,255,255,0.1)",
                     background: "rgba(255,255,255,0.05)",
                   }}>
-                    {lang === "zh" ? "沒有邀請" : "Not Invited"}
+                    {lang === "zh" ? guest.tag : guest.tagEn}
                   </span>
                 </div>
               </div>
