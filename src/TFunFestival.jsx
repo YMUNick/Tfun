@@ -600,24 +600,34 @@ export default function TFunFestival() {
           <div
             className="credits-list"
             style={{
-              display: "flex", flexWrap: "wrap",
-              justifyContent: "center", gap: "12px 24px",
+              display: "flex", flexDirection: "column",
+              alignItems: "center", gap: 40,
             }}
           >
             {staff.map((s) => (
-              <span
-                key={s.name}
-                style={{
+              <div key={s.name} style={{ textAlign: "center" }}>
+                <span style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 14, fontWeight: 400,
-                  letterSpacing: "0.6px",
+                  fontSize: 13, fontWeight: 500,
+                  letterSpacing: "1.5px",
                   textTransform: "uppercase",
                   opacity: 0.4,
                   color: "var(--white)",
-                }}
-              >
-                {s.name}
-              </span>
+                  display: "block",
+                  marginBottom: 8,
+                }}>
+                  {lang === "zh" ? s.role : s.roleEn}
+                </span>
+                <span style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 28, fontWeight: 500,
+                  letterSpacing: "-0.5px",
+                  color: "var(--white)",
+                  opacity: 0.8,
+                }}>
+                  {s.name}
+                </span>
+              </div>
             ))}
           </div>
         </div>
