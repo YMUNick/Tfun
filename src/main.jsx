@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import TFunFestival from './TFunFestival'
 import LineupPage from './LineupPage'
+import SecretGuests from './SecretGuests'
 import './styles.css'
 
 createRoot(document.getElementById('root')).render(
@@ -11,6 +12,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<TFunFestival />} />
         <Route path="/lineup" element={<LineupPage />} />
+        <Route path="/secret" element={<SecretGuests />} />
       </Routes>
     </HashRouter>
   </StrictMode>,

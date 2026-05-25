@@ -121,6 +121,20 @@ export default function TFunFestival() {
               {link.label}
             </button>
           ))}
+          <Link
+            to="/secret"
+            className="pill-btn"
+            style={{
+              padding: "5px 16px", fontSize: 12, fontWeight: 540,
+              textDecoration: "none",
+              background: "rgba(255,215,0,0.15)",
+              color: "#FFD700",
+              borderColor: "rgba(255,215,0,0.3)",
+              letterSpacing: "0.5px",
+            }}
+          >
+            {lang === "zh" ? "隱藏嘉賓" : "Secret"}
+          </Link>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -166,6 +180,18 @@ export default function TFunFestival() {
             {link.label}
           </button>
         ))}
+        <Link
+          to="/secret"
+          onClick={closeMenu}
+          style={{
+            textDecoration: "none",
+            color: "#FFD700",
+            font: "inherit",
+            fontSize: 32, fontWeight: 500, letterSpacing: "-0.5px",
+          }}
+        >
+          {lang === "zh" ? "隱藏嘉賓" : "Secret"}
+        </Link>
       </div>
 
       {/* ─── HERO ─── */}
