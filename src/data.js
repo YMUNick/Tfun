@@ -122,7 +122,7 @@ export const bands = [
   },
   {
     id: 5,
-    name: "Swenson x5",
+    name: "Grace後援會",
     genre: "STRINGS",
     members: {
       zh: "小提琴五重奏",
