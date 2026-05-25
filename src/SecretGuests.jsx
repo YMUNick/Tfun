@@ -2,30 +2,29 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { i18n } from "./data";
 
+const BASE = import.meta.env.BASE_URL;
+
 const guests = [
   {
     name: "五月天",
     nameEn: "Mayday",
     genre: "ROCK",
     color: "#FF003C",
-    gradient: "linear-gradient(135deg, #1a1a2e 0%, #e94560 50%, #0f3460 100%)",
-    initial: "五",
+    image: BASE + "mayday.jpg",
   },
   {
     name: "周杰倫",
     nameEn: "Jay Chou",
     genre: "MANDOPOP / R&B",
     color: "#FFD700",
-    gradient: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)",
-    initial: "J",
+    image: BASE + "jay.jpg",
   },
   {
     name: "美秀集團",
     nameEn: "Amazing Show",
     genre: "INDIE ROCK",
     color: "#39FF14",
-    gradient: "linear-gradient(135deg, #11998e 0%, #38ef7d 50%, #0f3443 100%)",
-    initial: "美",
+    image: BASE + "美秀.jpg",
   },
 ];
 
@@ -57,26 +56,14 @@ export default function SecretGuests() {
           transform: translateY(-8px) scale(1.02);
           box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
-        .guest-card:hover .guest-initial {
-          transform: scale(1.1);
-          opacity: 0.15;
+        .guest-photo {
+          transition: transform 0.5s ease;
         }
-        .guest-initial {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-family: var(--font-sans);
-          font-size: 180px;
-          font-weight: 700;
-          opacity: 0.08;
-          pointer-events: none;
-          transition: transform 0.4s ease, opacity 0.4s ease;
-          line-height: 1;
+        .guest-card:hover .guest-photo {
+          transform: scale(1.05);
         }
         @media (max-width: 768px) {
           .guests-grid { grid-template-columns: 1fr !important; }
-          .guest-initial { font-size: 120px; }
         }
       `}</style>
 
@@ -169,23 +156,33 @@ export default function SecretGuests() {
         >
           {guests.map((guest) => (
             <div key={guest.name} className="guest-card">
-              {/* Background gradient */}
               <div style={{
-                background: guest.gradient,
-                padding: "60px 32px 40px",
-                minHeight: 380,
+                position: "relative",
+                minHeight: 420,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-end",
-                position: "relative",
+                overflow: "hidden",
               }}>
-                {/* Large initial letter */}
-                <span className="guest-initial" style={{ color: guest.color }}>
-                  {guest.initial}
-                </span>
+                {/* Photo background */}
+                <img
+                  src={guest.image}
+                  alt={guest.name}
+                  className="guest-photo"
+                  style={{
+                    position: "absolute", inset: 0,
+                    width: "100%", height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+                {/* Dark gradient overlay for text readability */}
+                <div style={{
+                  position: "absolute", inset: 0,
+                  background: "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 100%)",
+                }} />
 
                 {/* Content */}
-                <div style={{ position: "relative", zIndex: 1 }}>
+                <div style={{ position: "relative", zIndex: 1, padding: "60px 32px 40px" }}>
                   {/* Genre */}
                   <span style={{
                     fontFamily: "var(--font-mono)",
