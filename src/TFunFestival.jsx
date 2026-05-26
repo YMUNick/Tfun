@@ -366,12 +366,12 @@ export default function TFunFestival() {
                         src={import.meta.env.BASE_URL + img}
                         alt={band.name}
                         draggable={false}
-                        className="carousel-img"
+                        className={band.images.length > 1 ? "carousel-img" : undefined}
                         style={{
                           position: "absolute", inset: 0,
                           width: "100%", height: "100%",
                           objectFit: "cover",
-                          animationDelay: `${i * (6 / band.images.length)}s`,
+                          ...(band.images.length > 1 ? { animationDelay: `${i * (6 / band.images.length)}s` } : {}),
                         }}
                       />
                     ))}
