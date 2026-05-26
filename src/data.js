@@ -80,6 +80,7 @@ export const bands = [
     id: 1,
     name: "Vivian",
     genre: "M-POP / J-ROCK",
+    image: "Kaho.jpeg",
     members: {
       zh: "Vocal: Nick ／ Guitar: Kaho ／ Drum: Vivian",
       en: "Vocal: Nick / Guitar: Kaho / Drum: Vivian",

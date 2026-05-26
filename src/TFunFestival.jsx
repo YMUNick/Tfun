@@ -357,11 +357,30 @@ export default function TFunFestival() {
                 draggable={false}
                 onClick={(e) => { if (isDragging.current) e.preventDefault(); }}
               >
-                {/* Color gradient background */}
-                <div style={{
-                  position: "absolute", inset: 0,
-                  background: `linear-gradient(180deg, ${band.color}18 0%, ${band.color}50 100%)`,
-                }} />
+                {/* Background: photo or color gradient */}
+                {band.image ? (
+                  <>
+                    <img
+                      src={import.meta.env.BASE_URL + band.image}
+                      alt={band.name}
+                      draggable={false}
+                      style={{
+                        position: "absolute", inset: 0,
+                        width: "100%", height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <div style={{
+                      position: "absolute", inset: 0,
+                      background: "linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%)",
+                    }} />
+                  </>
+                ) : (
+                  <div style={{
+                    position: "absolute", inset: 0,
+                    background: `linear-gradient(180deg, ${band.color}18 0%, ${band.color}50 100%)`,
+                  }} />
+                )}
                 {/* Bottom accent line */}
                 <div style={{
                   position: "absolute", bottom: 0, left: 0, right: 0,
