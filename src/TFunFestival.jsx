@@ -357,22 +357,28 @@ export default function TFunFestival() {
                 draggable={false}
                 onClick={(e) => { if (isDragging.current) e.preventDefault(); }}
               >
-                {/* Background: photo or color gradient */}
-                {band.image ? (
+                {/* Background: photo carousel or color gradient */}
+                {band.images ? (
                   <>
-                    <img
-                      src={import.meta.env.BASE_URL + band.image}
-                      alt={band.name}
-                      draggable={false}
-                      style={{
-                        position: "absolute", inset: 0,
-                        width: "100%", height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />
+                    {band.images.map((img, i) => (
+                      <img
+                        key={img}
+                        src={import.meta.env.BASE_URL + img}
+                        alt={band.name}
+                        draggable={false}
+                        className="carousel-img"
+                        style={{
+                          position: "absolute", inset: 0,
+                          width: "100%", height: "100%",
+                          objectFit: "cover",
+                          animationDelay: `${i * (6 / band.images.length)}s`,
+                        }}
+                      />
+                    ))}
                     <div style={{
                       position: "absolute", inset: 0,
                       background: "linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%)",
+                      zIndex: 1,
                     }} />
                   </>
                 ) : (
