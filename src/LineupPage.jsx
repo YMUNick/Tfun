@@ -69,6 +69,8 @@ export default function LineupPage() {
           .lineup-artist-name { font-size: 36px !important; letter-spacing: -0.5px; }
           .lineup-row { flex-direction: column; gap: 4px !important; }
           .lineup-genre { margin-top: 2px; }
+          .lineup-photos { grid-template-columns: 1fr !important; }
+          .lineup-photos > div { aspect-ratio: 16/9 !important; }
         }
         @media (max-width: 480px) {
           .lineup-artist-name { font-size: 28px !important; }
@@ -281,7 +283,7 @@ export default function LineupPage() {
                       {/* Photos */}
                       {band.images && band.images.length > 0 && (
                         <div style={{ marginTop: 24 }}>
-                          <div style={{
+                          <div className="lineup-photos" style={{
                             display: "grid",
                             gridTemplateColumns: `repeat(${band.images.length}, 1fr)`,
                             gap: 12,
