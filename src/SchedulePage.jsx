@@ -29,13 +29,16 @@ export default function SchedulePage() {
     const shuffled = shuffle(bands);
     const startHour = 14;
     const startMinute = 0;
-    const setDuration = 25;
+    const defaultDuration = 25;
+    let elapsed = 0;
 
     return shuffled.map((band, i) => {
-      const totalMinutes = startHour * 60 + startMinute + i * setDuration;
+      const totalMinutes = startHour * 60 + startMinute + elapsed;
+      const duration = band.duration || defaultDuration;
+      elapsed += duration;
       const h = Math.floor(totalMinutes / 60);
       const m = totalMinutes % 60;
-      const endTotal = totalMinutes + setDuration;
+      const endTotal = totalMinutes + duration;
       const eh = Math.floor(endTotal / 60);
       const em = endTotal % 60;
       return {

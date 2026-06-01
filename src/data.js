@@ -114,6 +114,7 @@ export const bands = [
     id: 4,
     name: "歹灣郎宮廟總會",
     genre: "DANCE",
+    duration: 10,
     images: ["dancingclub.png"],
     members: {
       zh: "YuFeng ／ 安 ／ Dio ／ Lynn ／ Ty ／ Winney ／ Sun ／ 得瑋 — 熱舞社",
@@ -126,6 +127,7 @@ export const bands = [
     id: 5,
     name: "Grace後援會",
     genre: "STRINGS",
+    duration: 10,
     members: {
       zh: "小提琴五重奏",
       en: "Violin Quintet",
