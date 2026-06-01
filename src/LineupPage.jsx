@@ -70,7 +70,7 @@ export default function LineupPage() {
           .lineup-row { flex-direction: column; gap: 4px !important; }
           .lineup-genre { margin-top: 2px; }
           .lineup-photos { grid-template-columns: 1fr !important; }
-          .lineup-photos > div { aspect-ratio: 16/9 !important; }
+          .lineup-photos > div { aspect-ratio: auto !important; }
         }
         @media (max-width: 480px) {
           .lineup-artist-name { font-size: 28px !important; }
@@ -293,15 +293,13 @@ export default function LineupPage() {
                                 position: "relative",
                                 borderRadius: 8,
                                 overflow: "hidden",
-                                aspectRatio: band.images.length === 1 ? "16/9" : "1/1",
                               }}>
                                 <img
                                   src={import.meta.env.BASE_URL + img}
                                   alt={band.name}
                                   style={{
                                     width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
+                                    height: "auto",
                                     display: "block",
                                   }}
                                 />
