@@ -122,6 +122,18 @@ export default function TFunFestival() {
             </button>
           ))}
           <Link
+            to="/schedule"
+            className="nav-link"
+            style={{
+              textDecoration: "none",
+              color: scrolled ? "var(--black)" : "var(--white)",
+              background: "none", border: "none", cursor: "pointer",
+              font: "inherit",
+            }}
+          >
+            {t.nav.schedule}
+          </Link>
+          <Link
             to="/secret"
             className="pill-btn"
             style={{
@@ -180,6 +192,18 @@ export default function TFunFestival() {
             {link.label}
           </button>
         ))}
+        <Link
+          to="/schedule"
+          onClick={closeMenu}
+          style={{
+            textDecoration: "none",
+            color: "var(--white)",
+            font: "inherit",
+            fontSize: 32, fontWeight: 500, letterSpacing: "-0.5px",
+          }}
+        >
+          {t.nav.schedule}
+        </Link>
         <Link
           to="/secret"
           onClick={closeMenu}

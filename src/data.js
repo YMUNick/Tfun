@@ -1,6 +1,6 @@
 export const i18n = {
   zh: {
-    nav: { lineup: "演出陣容", info: "活動資訊", credits: "工作人員" },
+    nav: { lineup: "演出陣容", schedule: "演出時間表", info: "活動資訊", credits: "工作人員" },
     hero: {
       title: "TAIWANESE FUN",
       titleShort: "T FUN",
@@ -37,7 +37,7 @@ export const i18n = {
     lang: "EN",
   },
   en: {
-    nav: { lineup: "Lineup", info: "Info", credits: "Credits" },
+    nav: { lineup: "Lineup", schedule: "Schedule", info: "Info", credits: "Credits" },
     hero: {
       title: "TAIWANESE FUN",
       titleShort: "T FUN",
@@ -137,6 +137,7 @@ export const bands = [
     id: 6,
     name: "PASH",
     genre: "ORIGINAL",
+    images: ["PASH.png"],
     members: {
       zh: "Vocal: PASH ／ Guitar: Kaho",
       en: "Vocal: PASH / Guitar: Kaho",
