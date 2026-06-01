@@ -45,7 +45,7 @@ export default function LineupPage() {
           transition: max-height 0.4s ease, padding 0.4s ease;
         }
         .lineup-detail.open {
-          max-height: 400px;
+          max-height: 800px;
         }
         .lineup-genre {
           font-family: var(--font-mono);
@@ -273,6 +273,43 @@ export default function LineupPage() {
                               >
                                 {song}
                               </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Photos */}
+                      {band.images && band.images.length > 0 && (
+                        <div style={{ marginTop: 24 }}>
+                          <div style={{
+                            display: "grid",
+                            gridTemplateColumns: `repeat(${band.images.length}, 1fr)`,
+                            gap: 12,
+                          }}>
+                            {band.images.map((img) => (
+                              <div key={img} style={{
+                                position: "relative",
+                                borderRadius: 8,
+                                overflow: "hidden",
+                                aspectRatio: band.images.length === 1 ? "16/9" : "1/1",
+                              }}>
+                                <img
+                                  src={import.meta.env.BASE_URL + img}
+                                  alt={band.name}
+                                  style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    display: "block",
+                                  }}
+                                />
+                                <div style={{
+                                  position: "absolute", inset: 0,
+                                  border: `1px solid ${band.color}30`,
+                                  borderRadius: 8,
+                                  pointerEvents: "none",
+                                }} />
+                              </div>
                             ))}
                           </div>
                         </div>
