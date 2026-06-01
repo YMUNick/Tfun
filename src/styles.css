@@ -66,9 +66,9 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 @keyframes pulseGlow {
   0%, 100% { text-shadow: 0 0 20px rgba(57,255,20,0.3), 0 0 60px rgba(255,0,60,0.1); }
@@ -288,8 +288,9 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
 @media (max-width: 768px) {
   .nav-links-desktop { display: none !important; }
   .hamburger { display: block; }
-  .hero-title { font-size: 56px !important; }
+  .hero-title { font-size: 56px !important; animation: fadeInUp 0.8s ease 0.15s both !important; }
   .hero-subtitle { font-size: 28px !important; }
+  .hero-noise { opacity: 0 !important; }
   .bands-grid { grid-template-columns: 1fr !important; }
   .info-grid { grid-template-columns: 1fr !important; }
   .credits-list { flex-direction: column !important; align-items: center !important; }

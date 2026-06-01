@@ -225,15 +225,22 @@ export default function TFunFestival() {
           minHeight: "100vh",
           display: "flex", flexDirection: "column",
           alignItems: "center", justifyContent: "center",
-          background: "linear-gradient(135deg, #39FF14 0%, #FFFF00 20%, #FF69B4 40%, #BF00FF 60%, #00FFFF 80%, #FF003C 100%)",
-          backgroundSize: "300% 300%",
-          animation: "gradientShift 8s ease infinite",
+          background: "#000",
           position: "relative", overflow: "hidden",
           padding: "120px 24px 80px",
           textAlign: "center",
         }}
       >
+        {/* GPU-accelerated gradient layer using transform instead of background-position */}
         <div style={{
+          position: "absolute", inset: 0,
+          width: "200%", height: "100%",
+          background: "linear-gradient(135deg, #39FF14 0%, #FFFF00 10%, #FF69B4 20%, #BF00FF 30%, #00FFFF 40%, #FF003C 50%, #39FF14 60%, #FFFF00 70%, #FF69B4 80%, #BF00FF 90%, #00FFFF 100%)",
+          animation: "gradientShift 8s ease infinite",
+          willChange: "transform",
+          pointerEvents: "none",
+        }} />
+        <div className="hero-noise" style={{
           position: "absolute", inset: 0, backgroundImage: noiseSVG,
           backgroundRepeat: "repeat", opacity: 0.5, pointerEvents: "none",
         }} />
