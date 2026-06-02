@@ -107,7 +107,7 @@ export const bands = [
       zh: "Vocal: Frida ／ Guitar: Rui-Yi ／ Others: 鎮宇",
       en: "Vocal: Frida / Guitar: Rui-Yi / Others: Zhen-Yu",
     },
-    songs: [],
+    songs: ["F.I.R - 星火", "怕胖團 - 魚", "自創曲"],
     color: "#FF69B4",
   },
   {
