@@ -70,8 +70,8 @@ export default function LineupPage() {
           .lineup-row { flex-direction: column; gap: 4px !important; }
           .lineup-genre { margin-top: 2px; }
           .lineup-photos { grid-template-columns: 1fr !important; }
-          .lineup-photos > div { aspect-ratio: auto !important; }
-          .lineup-photos > div img { width: 100% !important; height: auto !important; object-fit: contain !important; }
+          .lineup-photo-item { aspect-ratio: auto !important; max-width: 100% !important; }
+          .lineup-photo-item img { width: 100% !important; height: auto !important; max-height: 420px !important; object-fit: contain !important; object-position: center !important; }
         }
         @media (max-width: 480px) {
           .lineup-artist-name { font-size: 28px !important; }
@@ -290,11 +290,11 @@ export default function LineupPage() {
                             gap: 12,
                           }}>
                             {band.images.map((img) => (
-                              <div key={img} style={{
+                              <div key={img} className="lineup-photo-item" style={{
                                 position: "relative",
                                 borderRadius: 8,
                                 overflow: "hidden",
-                                ...(band.images.length > 1 ? { aspectRatio: "3/4" } : {}),
+                                ...(band.images.length > 1 ? { aspectRatio: "4/5" } : { maxWidth: 480 }),
                               }}>
                                 <img
                                   src={import.meta.env.BASE_URL + img}
@@ -302,8 +302,8 @@ export default function LineupPage() {
                                   style={{
                                     width: "100%",
                                     ...(band.images.length > 1
-                                      ? { height: "100%", objectFit: "cover" }
-                                      : { height: "auto" }),
+                                      ? { height: "100%", objectFit: "cover", objectPosition: "top center" }
+                                      : { height: "auto", maxHeight: 480 , objectFit: "contain" }),
                                     display: "block",
                                   }}
                                 />
