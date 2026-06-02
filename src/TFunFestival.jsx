@@ -94,6 +94,7 @@ export default function TFunFestival() {
           onClick={() => scrollTo("hero")}
           style={{
             background: "none", border: "none", cursor: "pointer", padding: 0,
+            animation: "fadeInUp 0.8s ease both",
           }}
         >
           <span style={{
@@ -106,7 +107,7 @@ export default function TFunFestival() {
           </span>
         </button>
 
-        <div className="nav-links-desktop" style={{ display: "flex", gap: 32, alignItems: "center" }}>
+        <div className="nav-links-desktop" style={{ display: "flex", gap: 32, alignItems: "center", animation: "fadeInUp 0.8s ease 0.15s both" }}>
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -149,7 +150,7 @@ export default function TFunFestival() {
           </Link>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, animation: "fadeInUp 0.8s ease 0.3s both" }}>
           <button
             onClick={toggleLang}
             className="pill-btn"
