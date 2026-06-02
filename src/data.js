@@ -103,6 +103,7 @@ export const bands = [
     id: 3,
     name: "Frida",
     genre: "MANDOPOP",
+    images: ["Aries.jpeg"],
     members: {
       zh: "Vocal: Frida ／ Guitar: Rui-Yi ／ Others: 鎮宇",
       en: "Vocal: Frida / Guitar: Rui-Yi / Others: Zhen-Yu",
