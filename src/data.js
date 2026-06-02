@@ -172,9 +172,9 @@ export const bands = [
       en: "Vocal: Dean (temp) / Bass: Dean / Guitar: Darren / Drum: Perry",
     },
     songs: [
-      "透明雜誌 - 時速160公里的吉他、BASS和鼓",
+      "透明雜誌 - 透明雜誌Forever",
       "拍謝少年 - 歹勢中年",
-      "Hi Standard - Dear My Friend",
+      "拍謝少年 - 噪音公寓",
     ],
     color: "#FF003C",
   },
