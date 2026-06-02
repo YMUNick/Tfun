@@ -37,6 +37,7 @@ const guests = [
 export default function SecretGuests() {
   const [lang, setLang] = useState(() => localStorage.getItem("tfun-lang") || "zh");
   const t = i18n[lang];
+  const [revealedCards, setRevealedCards] = useState(new Set());
 
   useEffect(() => {
     localStorage.setItem("tfun-lang", lang);
@@ -44,6 +45,12 @@ export default function SecretGuests() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Staggered spotlight reveal from left to right
+    guests.forEach((_, i) => {
+      setTimeout(() => {
+        setRevealedCards((prev) => new Set([...prev, i]));
+      }, 800 + i * 600);
+    });
   }, []);
 
   const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
@@ -55,17 +62,41 @@ export default function SecretGuests() {
           position: relative;
           border-radius: 16px;
           overflow: hidden;
-          transition: transform 0.4s ease, box-shadow 0.4s ease;
           cursor: default;
+          opacity: 0;
+          transform: scale(0.95);
+          filter: brightness(0);
+          transition: opacity 0.8s ease, transform 0.8s ease, filter 1s ease, box-shadow 0.4s ease;
         }
-        .guest-card:hover {
+        .guest-card.revealed {
+          opacity: 1;
+          transform: scale(1);
+          filter: brightness(1);
+        }
+        .guest-card.revealed:hover {
           transform: translateY(-8px) scale(1.02);
           box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .guest-spotlight {
+          position: absolute; inset: 0;
+          background: radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.25) 0%, transparent 70%);
+          opacity: 0;
+          transition: opacity 0.6s ease 0.3s;
+          pointer-events: none;
+          z-index: 2;
+        }
+        .guest-card.revealed .guest-spotlight {
+          opacity: 1;
+          animation: spotlightFade 1.5s ease 0.5s forwards;
+        }
+        @keyframes spotlightFade {
+          0% { opacity: 1; }
+          100% { opacity: 0; }
         }
         .guest-photo {
           transition: transform 0.5s ease;
         }
-        .guest-card:hover .guest-photo {
+        .guest-card.revealed:hover .guest-photo {
           transform: scale(1.05);
         }
         @media (max-width: 768px) {
@@ -160,8 +191,10 @@ export default function SecretGuests() {
             gap: 24,
           }}
         >
-          {guests.map((guest) => (
-            <div key={guest.name} className="guest-card">
+          {guests.map((guest, i) => (
+            <div key={guest.name} className={`guest-card ${revealedCards.has(i) ? "revealed" : ""}`}>
+              {/* Spotlight flash overlay */}
+              <div className="guest-spotlight" />
               <div style={{
                 position: "relative",
                 minHeight: 420,
