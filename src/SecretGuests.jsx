@@ -32,6 +32,15 @@ const guests = [
     tag: "肯定不會來",
     tagEn: "Definitely Won't Come",
   },
+  {
+    name: "Genesa",
+    nameEn: "Genesa",
+    genre: "MC",
+    color: "#FF6B35",
+    image: BASE + "Genesa.jpg",
+    tag: "重金禮聘 最辣MC",
+    tagEn: "Big Money, Hottest MC",
+  },
 ];
 
 export default function SecretGuests() {
