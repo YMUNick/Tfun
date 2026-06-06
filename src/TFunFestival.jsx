@@ -384,7 +384,7 @@ export default function TFunFestival() {
             {bands.map((band) => (
               <Link
                 key={band.id}
-                to="/lineup"
+                to={`/lineup?band=${band.id}`}
                 className="scroll-card"
                 draggable={false}
                 onClick={(e) => { if (isDragging.current) e.preventDefault(); }}

@@ -1,19 +1,28 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { i18n, bands } from "./data";
 
 export default function LineupPage() {
   const [lang, setLang] = useState(() => localStorage.getItem("tfun-lang") || "zh");
   const t = i18n[lang];
-  const [expandedId, setExpandedId] = useState(null);
+  const [searchParams] = useSearchParams();
+  const targetBandId = searchParams.get("band") ? Number(searchParams.get("band")) : null;
+  const [expandedId, setExpandedId] = useState(targetBandId);
+  const bandRefs = useRef({});
 
   useEffect(() => {
     localStorage.setItem("tfun-lang", lang);
   }, [lang]);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (targetBandId && bandRefs.current[targetBandId]) {
+      setTimeout(() => {
+        bandRefs.current[targetBandId].scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [targetBandId]);
 
   const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
 
@@ -152,6 +161,7 @@ export default function LineupPage() {
             return (
               <div
                 key={band.id}
+                ref={(el) => (bandRefs.current[band.id] = el)}
                 className="lineup-artist"
                 style={{ "--artist-color": band.color }}
                 onClick={() => setExpandedId(isOpen ? null : band.id)}
