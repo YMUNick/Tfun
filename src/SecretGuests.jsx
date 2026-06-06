@@ -206,7 +206,7 @@ export default function SecretGuests() {
               <div className="guest-spotlight" />
               <div style={{
                 position: "relative",
-                minHeight: 420,
+                aspectRatio: "9/16",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "flex-end",
@@ -221,6 +221,7 @@ export default function SecretGuests() {
                     position: "absolute", inset: 0,
                     width: "100%", height: "100%",
                     objectFit: "cover",
+                    objectPosition: "top center",
                   }}
                 />
                 {/* Dark gradient overlay for text readability */}
