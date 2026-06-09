@@ -128,7 +128,7 @@ export const bands = [
     id: 5,
     name: "Grace後援會",
     genre: "STRINGS",
-    duration: 10,
+    duration: 20,
     images: ["Swenson.jpg"],
     members: {
       zh: "頌缽：Jinghan ／ Grace ／ Swenson ／ Greta",
