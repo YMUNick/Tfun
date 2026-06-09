@@ -129,11 +129,12 @@ export const bands = [
     name: "Grace後援會",
     genre: "STRINGS",
     duration: 10,
+    images: ["Swenson.jpg"],
     members: {
-      zh: "小提琴五重奏",
-      en: "Violin Quintet",
+      zh: "頌缽：Jinghan ／ Grace ／ Swenson ／ Greta",
+      en: "Singing Bowl: Jinghan / Grace / Swenson / Greta",
     },
-    songs: ["卡農 (Canon)"],
+    songs: ["島嶼共振：頌缽鳴心 (Island Resonance)"],
     color: "#00FFFF",
   },
   {
