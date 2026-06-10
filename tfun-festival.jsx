@@ -162,7 +162,7 @@ const bands = [
   },
   {
     id: 8,
-    name: "Dean",
+    name: "Beyblade X",
     genre: "PUNK / POP",
     leader: "Dean",
     members: {
