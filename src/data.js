@@ -166,7 +166,7 @@ export const bands = [
   },
   {
     id: 8,
-    name: "Dean",
+    name: "Beyblade X",
     genre: "PUNK / POP",
     members: {
       zh: "Vocal: Dean（暫代）／ Bass: Dean ／ Guitar: Darren ／ Drum: Perry",
