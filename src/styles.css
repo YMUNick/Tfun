@@ -142,6 +142,7 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
 
 .scroll-card {
   flex: 0 0 280px;
+  height: 420px;
   scroll-snap-align: start;
   position: relative;
   overflow: hidden;
