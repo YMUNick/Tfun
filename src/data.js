@@ -166,9 +166,9 @@ export const bands = [
   },
   {
     id: 8,
-    name: "Beyblade X",
+    name: "Babyblade <3",
     genre: "PUNK / POP",
-    images: ["beybladex.png", "Darren.png", "Dean.png", "Perry.png"],
+    images: ["Babyblade.png", "Darren.png", "Dean.png", "Perry.png"],
     members: {
       zh: "Vocal: Dean（暫代）／ Bass: Dean ／ Guitar: Darren ／ Drum: Perry",
       en: "Vocal: Dean (temp) / Bass: Dean / Guitar: Darren / Drum: Perry",
