@@ -95,8 +95,8 @@ export const bands = [
     homeImage: "Babyblade.png",
     images: ["Babyblade.png", "Darren.png", "Dean.png", "Perry.png"],
     members: {
-      zh: "Vocal: Dean（暫代）／ Bass: Dean ／ Guitar: Darren ／ Drum: Perry",
-      en: "Vocal: Dean (temp) / Bass: Dean / Guitar: Darren / Drum: Perry",
+      zh: "Vocal: Dean／ Bass: Dean ／ Guitar: Darren ／ Drum: Perry",
+      en: "Vocal: Dean / Bass: Dean / Guitar: Darren / Drum: Perry",
     },
     songs: [
       "透明雜誌 - 透明雜誌Forever",
