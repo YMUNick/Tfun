@@ -51,7 +51,8 @@ export default function LineupPage() {
         }
         .lineup-detail {
           max-height: 0;
-          overflow: hidden;
+          overflow-y: clip;
+          overflow-x: visible;
           transition: max-height 0.4s ease, padding 0.4s ease;
         }
         .lineup-detail.open {
