@@ -27,7 +27,7 @@ export default function LineupPage() {
   const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--black)", color: "var(--white)" }}>
+    <div style={{ minHeight: "100vh", background: "var(--black)", color: "var(--white)", overflowX: "hidden" }}>
       <style>{`
         .lineup-artist {
           border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -44,6 +44,7 @@ export default function LineupPage() {
           line-height: 1;
           transition: color 0.3s ease;
           margin: 0;
+          word-break: break-word;
         }
         .lineup-artist:hover .lineup-artist-name {
           color: var(--artist-color, #39FF14);
@@ -54,7 +55,7 @@ export default function LineupPage() {
           transition: max-height 0.4s ease, padding 0.4s ease;
         }
         .lineup-detail.open {
-          max-height: 1200px;
+          max-height: 2000px;
         }
         .lineup-genre {
           font-family: var(--font-mono);
@@ -64,6 +65,7 @@ export default function LineupPage() {
           letter-spacing: 1.5px;
           opacity: 0.4;
           transition: opacity 0.3s ease;
+          flex-shrink: 0;
         }
         .lineup-artist:hover .lineup-genre {
           opacity: 0.7;
@@ -74,27 +76,92 @@ export default function LineupPage() {
           opacity: 0.2;
           min-width: 32px;
         }
+        .lineup-detail-inner {
+          display: grid;
+          grid-template-columns: 32px 1fr;
+          gap: 0 24px;
+        }
+        .lineup-photos-wrap {
+          position: relative;
+          margin-top: 24px;
+        }
+        .lineup-photos-scroll {
+          display: flex;
+          gap: 12px;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 8px;
+          touch-action: pan-x;
+        }
         .lineup-photos-scroll::-webkit-scrollbar { height: 4px; }
         .lineup-photos-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 2px; }
         .lineup-photos-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+        .lineup-photo-card {
+          flex: 0 0 auto;
+          scroll-snap-align: start;
+          border-radius: 8px;
+          overflow: hidden;
+          position: relative;
+        }
+        .lineup-photo-card img {
+          height: 280px;
+          width: auto;
+          display: block;
+        }
+        .lineup-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 2;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(0,0,0,0.7);
+          border: 1px solid rgba(255,255,255,0.15);
+          color: var(--white);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .lineup-arrow-left { left: 8px; }
+        .lineup-arrow-right { right: 8px; }
+
         @media (max-width: 768px) {
-          .lineup-artist-name { font-size: 36px !important; letter-spacing: -0.5px; }
+          .lineup-artist-name { font-size: 28px !important; letter-spacing: -0.5px; }
           .lineup-row { flex-direction: column; gap: 4px !important; }
           .lineup-genre { margin-top: 2px; }
-          .lineup-photos-scroll img { height: 220px !important; }
+          .lineup-index { min-width: 24px; font-size: 12px; }
+          .lineup-detail-inner {
+            grid-template-columns: 1fr;
+            gap: 0;
+          }
+          .lineup-detail-inner > div:first-child { display: none; }
+          .lineup-photo-card img {
+            height: auto;
+            width: 75vw;
+            max-height: 360px;
+            object-fit: contain;
+          }
+          .lineup-arrow { width: 32px; height: 32px; }
         }
         @media (max-width: 480px) {
-          .lineup-artist-name { font-size: 28px !important; }
+          .lineup-artist-name { font-size: 24px !important; }
+          .lineup-photo-card img {
+            width: 80vw;
+            max-height: 300px;
+          }
         }
       `}</style>
 
-      {/* ─── NAV ─── */}
+      {/* NAV */}
       <nav style={{
         position: "sticky", top: 0, zIndex: 100,
         background: "rgba(0,0,0,0.92)",
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
-        padding: "16px 32px",
+        padding: "16px 24px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
         <Link to="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 12 }}>
@@ -123,9 +190,9 @@ export default function LineupPage() {
         </button>
       </nav>
 
-      {/* ─── HEADER ─── */}
+      {/* HEADER */}
       <header style={{
-        padding: "100px 32px 60px",
+        padding: "80px 24px 48px",
         maxWidth: 1200, margin: "0 auto",
       }}>
         <span className="mono-label" style={{
@@ -154,8 +221,8 @@ export default function LineupPage() {
         </p>
       </header>
 
-      {/* ─── ARTIST LIST ─── */}
-      <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px 120px" }}>
+      {/* ARTIST LIST */}
+      <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 120px" }}>
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
           {bands.map((band, i) => {
             const isOpen = expandedId === band.id;
@@ -173,19 +240,19 @@ export default function LineupPage() {
                   style={{
                     display: "flex",
                     alignItems: "baseline",
-                    gap: 24,
-                    padding: "28px 0",
+                    gap: 16,
+                    padding: "24px 0",
                   }}
                 >
                   <span className="lineup-index">
                     {String(i + 1).padStart(2, "0")}
                   </span>
 
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <h2
                       className="lineup-artist-name"
                       style={{
-                        fontSize: "clamp(40px, 6vw, 64px)",
+                        fontSize: "clamp(28px, 6vw, 64px)",
                         color: isOpen ? band.color : "var(--white)",
                       }}
                     >
@@ -195,7 +262,6 @@ export default function LineupPage() {
 
                   <span className="lineup-genre">{band.genre}</span>
 
-                  {/* expand indicator */}
                   <svg
                     width="20" height="20" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" strokeWidth="1.5"
@@ -216,11 +282,7 @@ export default function LineupPage() {
                   className={`lineup-detail ${isOpen ? "open" : ""}`}
                   style={{ paddingBottom: isOpen ? 32 : 0 }}
                 >
-                  <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "32px 1fr",
-                    gap: "0 24px",
-                  }}>
+                  <div className="lineup-detail-inner">
                     <div />
                     <div>
                       {/* Color accent bar */}
@@ -250,6 +312,7 @@ export default function LineupPage() {
                           letterSpacing: "-0.14px",
                           lineHeight: 1.7,
                           opacity: 0.7,
+                          wordBreak: "break-word",
                         }}>
                           {band.members[lang]}
                         </p>
@@ -295,80 +358,44 @@ export default function LineupPage() {
                       {/* Photos */}
                       {band.images && band.images.length > 0 && (
                         <div
-                          style={{ marginTop: 24, position: "relative" }}
+                          className="lineup-photos-wrap"
                           onClick={(e) => e.stopPropagation()}
                           onTouchStart={(e) => e.stopPropagation()}
                         >
-                          {/* Left arrow */}
                           {band.images.length > 1 && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                const el = e.currentTarget.parentElement.querySelector(".lineup-photos-scroll");
-                                el.scrollBy({ left: -240, behavior: "smooth" });
-                              }}
-                              style={{
-                                position: "absolute", left: -16, top: "50%", transform: "translateY(-50%)",
-                                zIndex: 2, width: 36, height: 36, borderRadius: "50%",
-                                background: "rgba(0,0,0,0.7)", border: "1px solid rgba(255,255,255,0.15)",
-                                color: "var(--white)", cursor: "pointer",
-                                display: "flex", alignItems: "center", justifyContent: "center",
-                              }}
-                            >
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="15 18 9 12 15 6" />
-                              </svg>
-                            </button>
+                            <>
+                              <button
+                                className="lineup-arrow lineup-arrow-left"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  e.currentTarget.parentElement.querySelector(".lineup-photos-scroll")
+                                    .scrollBy({ left: -240, behavior: "smooth" });
+                                }}
+                              >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="15 18 9 12 15 6" />
+                                </svg>
+                              </button>
+                              <button
+                                className="lineup-arrow lineup-arrow-right"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  e.currentTarget.parentElement.querySelector(".lineup-photos-scroll")
+                                    .scrollBy({ left: 240, behavior: "smooth" });
+                                }}
+                              >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                              </button>
+                            </>
                           )}
-                          {/* Right arrow */}
-                          {band.images.length > 1 && (
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                const el = e.currentTarget.parentElement.querySelector(".lineup-photos-scroll");
-                                el.scrollBy({ left: 240, behavior: "smooth" });
-                              }}
-                              style={{
-                                position: "absolute", right: -16, top: "50%", transform: "translateY(-50%)",
-                                zIndex: 2, width: 36, height: 36, borderRadius: "50%",
-                                background: "rgba(0,0,0,0.7)", border: "1px solid rgba(255,255,255,0.15)",
-                                color: "var(--white)", cursor: "pointer",
-                                display: "flex", alignItems: "center", justifyContent: "center",
-                              }}
-                            >
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <polyline points="9 18 15 12 9 6" />
-                              </svg>
-                            </button>
-                          )}
-                          <div
-                            className="lineup-photos-scroll"
-                            style={{
-                              display: "flex",
-                              gap: 12,
-                              overflowX: "auto",
-                              scrollSnapType: "x mandatory",
-                              WebkitOverflowScrolling: "touch",
-                              paddingBottom: 8,
-                              touchAction: "pan-x",
-                            }}
-                          >
+                          <div className="lineup-photos-scroll">
                             {band.images.map((img) => (
-                              <div key={img} style={{
-                                flex: "0 0 auto",
-                                scrollSnapAlign: "start",
-                                borderRadius: 8,
-                                overflow: "hidden",
-                                position: "relative",
-                              }}>
+                              <div key={img} className="lineup-photo-card">
                                 <img
                                   src={import.meta.env.BASE_URL + img}
                                   alt={band.name}
-                                  style={{
-                                    height: 280,
-                                    width: "auto",
-                                    display: "block",
-                                  }}
                                 />
                                 <div style={{
                                   position: "absolute", inset: 0,
@@ -390,7 +417,7 @@ export default function LineupPage() {
         </div>
       </section>
 
-      {/* ─── FOOTER ─── */}
+      {/* FOOTER */}
       <footer style={{
         borderTop: "1px solid rgba(255,255,255,0.06)",
         padding: "32px 24px", textAlign: "center",
