@@ -295,14 +295,20 @@ export default function LineupPage() {
                       {/* Photos */}
                       {band.images && band.images.length > 0 && (
                         <div style={{ marginTop: 24 }}>
-                          <div className="lineup-photos-scroll" style={{
-                            display: "flex",
-                            gap: 12,
-                            overflowX: "auto",
-                            scrollSnapType: "x mandatory",
-                            WebkitOverflowScrolling: "touch",
-                            paddingBottom: 8,
-                          }}>
+                          <div
+                            className="lineup-photos-scroll"
+                            onClick={(e) => e.stopPropagation()}
+                            onTouchStart={(e) => e.stopPropagation()}
+                            style={{
+                              display: "flex",
+                              gap: 12,
+                              overflowX: "auto",
+                              scrollSnapType: "x mandatory",
+                              WebkitOverflowScrolling: "touch",
+                              paddingBottom: 8,
+                              touchAction: "pan-x",
+                            }}
+                          >
                             {band.images.map((img) => (
                               <div key={img} style={{
                                 flex: "0 0 auto",
