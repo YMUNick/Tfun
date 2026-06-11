@@ -55,7 +55,6 @@ export default function LineupPage() {
         }
         .lineup-detail.open {
           max-height: 1200px;
-          overflow: visible;
         }
         .lineup-genre {
           font-family: var(--font-mono);
