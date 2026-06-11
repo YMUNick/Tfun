@@ -392,18 +392,18 @@ export default function TFunFestival() {
                 {/* Background: photo carousel or color gradient */}
                 {band.images ? (
                   <>
-                    {band.images.map((img, i) => (
+                    {(band.homeImage ? [band.homeImage] : band.images).map((img, i, arr) => (
                       <img
                         key={img}
                         src={import.meta.env.BASE_URL + img}
                         alt={band.name}
                         draggable={false}
-                        className={band.images.length > 1 ? "carousel-img" : undefined}
+                        className={arr.length > 1 ? "carousel-img" : undefined}
                         style={{
                           position: "absolute", inset: 0,
                           width: "100%", height: "100%",
                           objectFit: "cover",
-                          ...(band.images.length > 1 ? { animationDelay: `${i * (6 / band.images.length)}s` } : {}),
+                          ...(arr.length > 1 ? { animationDelay: `${i * (6 / arr.length)}s` } : {}),
                         }}
                       />
                     ))}

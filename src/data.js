@@ -168,6 +168,7 @@ export const bands = [
     id: 8,
     name: "Babyblade <3",
     genre: "PUNK / POP",
+    homeImage: "Babyblade.png",
     images: ["Babyblade.png", "Darren.png", "Dean.png", "Perry.png"],
     members: {
       zh: "Vocal: Dean（暫代）／ Bass: Dean ／ Guitar: Darren ／ Drum: Perry",
