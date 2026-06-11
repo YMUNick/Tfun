@@ -54,7 +54,8 @@ export default function LineupPage() {
           transition: max-height 0.4s ease, padding 0.4s ease;
         }
         .lineup-detail.open {
-          max-height: 800px;
+          max-height: 1200px;
+          overflow: visible;
         }
         .lineup-genre {
           font-family: var(--font-mono);
@@ -294,11 +295,55 @@ export default function LineupPage() {
 
                       {/* Photos */}
                       {band.images && band.images.length > 0 && (
-                        <div style={{ marginTop: 24 }}>
+                        <div
+                          style={{ marginTop: 24, position: "relative" }}
+                          onClick={(e) => e.stopPropagation()}
+                          onTouchStart={(e) => e.stopPropagation()}
+                        >
+                          {/* Left arrow */}
+                          {band.images.length > 1 && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const el = e.currentTarget.parentElement.querySelector(".lineup-photos-scroll");
+                                el.scrollBy({ left: -240, behavior: "smooth" });
+                              }}
+                              style={{
+                                position: "absolute", left: -16, top: "50%", transform: "translateY(-50%)",
+                                zIndex: 2, width: 36, height: 36, borderRadius: "50%",
+                                background: "rgba(0,0,0,0.7)", border: "1px solid rgba(255,255,255,0.15)",
+                                color: "var(--white)", cursor: "pointer",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                              }}
+                            >
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="15 18 9 12 15 6" />
+                              </svg>
+                            </button>
+                          )}
+                          {/* Right arrow */}
+                          {band.images.length > 1 && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const el = e.currentTarget.parentElement.querySelector(".lineup-photos-scroll");
+                                el.scrollBy({ left: 240, behavior: "smooth" });
+                              }}
+                              style={{
+                                position: "absolute", right: -16, top: "50%", transform: "translateY(-50%)",
+                                zIndex: 2, width: 36, height: 36, borderRadius: "50%",
+                                background: "rgba(0,0,0,0.7)", border: "1px solid rgba(255,255,255,0.15)",
+                                color: "var(--white)", cursor: "pointer",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                              }}
+                            >
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="9 18 15 12 9 6" />
+                              </svg>
+                            </button>
+                          )}
                           <div
                             className="lineup-photos-scroll"
-                            onClick={(e) => e.stopPropagation()}
-                            onTouchStart={(e) => e.stopPropagation()}
                             style={{
                               display: "flex",
                               gap: 12,
