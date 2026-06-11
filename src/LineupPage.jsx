@@ -74,13 +74,14 @@ export default function LineupPage() {
           opacity: 0.2;
           min-width: 32px;
         }
+        .lineup-photos-scroll::-webkit-scrollbar { height: 4px; }
+        .lineup-photos-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 2px; }
+        .lineup-photos-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
         @media (max-width: 768px) {
           .lineup-artist-name { font-size: 36px !important; letter-spacing: -0.5px; }
           .lineup-row { flex-direction: column; gap: 4px !important; }
           .lineup-genre { margin-top: 2px; }
-          .lineup-photos { grid-template-columns: 1fr !important; }
-          .lineup-photo-item { aspect-ratio: auto !important; max-width: 100% !important; }
-          .lineup-photo-item img { width: 100% !important; height: auto !important; max-height: 420px !important; object-fit: contain !important; object-position: center !important; }
+          .lineup-photos-scroll img { height: 220px !important; }
         }
         @media (max-width: 480px) {
           .lineup-artist-name { font-size: 28px !important; }
@@ -294,26 +295,28 @@ export default function LineupPage() {
                       {/* Photos */}
                       {band.images && band.images.length > 0 && (
                         <div style={{ marginTop: 24 }}>
-                          <div className="lineup-photos" style={{
-                            display: "grid",
-                            gridTemplateColumns: `repeat(${Math.min(band.images.length, 2)}, 1fr)`,
+                          <div className="lineup-photos-scroll" style={{
+                            display: "flex",
                             gap: 12,
+                            overflowX: "auto",
+                            scrollSnapType: "x mandatory",
+                            WebkitOverflowScrolling: "touch",
+                            paddingBottom: 8,
                           }}>
                             {band.images.map((img) => (
-                              <div key={img} className="lineup-photo-item" style={{
-                                position: "relative",
+                              <div key={img} style={{
+                                flex: "0 0 auto",
+                                scrollSnapAlign: "start",
                                 borderRadius: 8,
                                 overflow: "hidden",
-                                aspectRatio: "3/4",
+                                position: "relative",
                               }}>
                                 <img
                                   src={import.meta.env.BASE_URL + img}
                                   alt={band.name}
                                   style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                    objectPosition: "top center",
+                                    height: 280,
+                                    width: "auto",
                                     display: "block",
                                   }}
                                 />
