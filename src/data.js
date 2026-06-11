@@ -89,15 +89,21 @@ export const bands = [
     color: "#39FF14",
   },
   {
-    id: 2,
-    name: "Jamie",
-    genre: "MANDOPOP",
+    id: 8,
+    name: "Babyblade <3",
+    genre: "PUNK / POP",
+    homeImage: "Babyblade.png",
+    images: ["Babyblade.png", "Darren.png", "Dean.png", "Perry.png"],
     members: {
-      zh: "Vocal: Jamie ／ Guitar: Darren ／ Drum: Aries",
-      en: "Vocal: Jamie / Guitar: Darren / Drum: Aries",
+      zh: "Vocal: Dean（暫代）／ Bass: Dean ／ Guitar: Darren ／ Drum: Perry",
+      en: "Vocal: Dean (temp) / Bass: Dean / Guitar: Darren / Drum: Perry",
     },
-    songs: [],
-    color: "#FFFF00",
+    songs: [
+      "透明雜誌 - 透明雜誌Forever",
+      "拍謝少年 - 歹勢中年",
+      "拍謝少年 - 噪音公寓",
+    ],
+    color: "#FF003C",
   },
   {
     id: 3,
@@ -165,21 +171,15 @@ export const bands = [
     color: "#39FF14",
   },
   {
-    id: 8,
-    name: "Babyblade <3",
-    genre: "PUNK / POP",
-    homeImage: "Babyblade.png",
-    images: ["Babyblade.png", "Darren.png", "Dean.png", "Perry.png"],
+    id: 2,
+    name: "Jamie",
+    genre: "MANDOPOP",
     members: {
-      zh: "Vocal: Dean（暫代）／ Bass: Dean ／ Guitar: Darren ／ Drum: Perry",
-      en: "Vocal: Dean (temp) / Bass: Dean / Guitar: Darren / Drum: Perry",
+      zh: "Vocal: Jamie ／ Guitar: Darren ／ Drum: Aries",
+      en: "Vocal: Jamie / Guitar: Darren / Drum: Aries",
     },
-    songs: [
-      "透明雜誌 - 透明雜誌Forever",
-      "拍謝少年 - 歹勢中年",
-      "拍謝少年 - 噪音公寓",
-    ],
-    color: "#FF003C",
+    songs: [],
+    color: "#FFFF00",
   },
 ];
 
