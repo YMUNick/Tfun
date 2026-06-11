@@ -84,7 +84,6 @@ Please change the parent <Route path="${L}"> to <Route path="${L==="/"?"*":`${L}
         }
         .lineup-detail.open {
           max-height: 1200px;
-          overflow: visible;
         }
         .lineup-genre {
           font-family: var(--font-mono);
