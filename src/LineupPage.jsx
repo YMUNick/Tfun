@@ -296,7 +296,7 @@ export default function LineupPage() {
                         <div style={{ marginTop: 24 }}>
                           <div className="lineup-photos" style={{
                             display: "grid",
-                            gridTemplateColumns: `repeat(${Math.min(band.images.length, 3)}, 1fr)`,
+                            gridTemplateColumns: `repeat(${Math.min(band.images.length, 2)}, 1fr)`,
                             gap: 12,
                           }}>
                             {band.images.map((img) => (
@@ -304,16 +304,16 @@ export default function LineupPage() {
                                 position: "relative",
                                 borderRadius: 8,
                                 overflow: "hidden",
-                                ...(band.images.length > 1 ? { aspectRatio: "4/5" } : { maxWidth: 480 }),
+                                aspectRatio: "3/4",
                               }}>
                                 <img
                                   src={import.meta.env.BASE_URL + img}
                                   alt={band.name}
                                   style={{
                                     width: "100%",
-                                    ...(band.images.length > 1
-                                      ? { height: "100%", objectFit: "cover", objectPosition: "top center" }
-                                      : { height: "auto", maxHeight: 480 , objectFit: "contain" }),
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    objectPosition: "top center",
                                     display: "block",
                                   }}
                                 />
