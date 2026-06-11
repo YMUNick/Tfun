@@ -296,7 +296,7 @@ export default function LineupPage() {
                         <div style={{ marginTop: 24 }}>
                           <div className="lineup-photos" style={{
                             display: "grid",
-                            gridTemplateColumns: `repeat(${band.images.length}, 1fr)`,
+                            gridTemplateColumns: `repeat(${Math.min(band.images.length, 3)}, 1fr)`,
                             gap: 12,
                           }}>
                             {band.images.map((img) => (
