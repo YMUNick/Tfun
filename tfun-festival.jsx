@@ -150,9 +150,9 @@ const bands = [
   },
   {
     id: 7,
-    name: "Yanrong",
+    name: "降什麼Key Lah",
     genre: "MANDOPOP",
-    leader: "Yanrong",
+    leader: "降什麼Key Lah",
     members: {
       zh: "Vocal: Yanrong ／ Guitar: Brian ／ Bass: Jason",
       en: "Vocal: Yanrong / Guitar: Brian / Bass: Jason",

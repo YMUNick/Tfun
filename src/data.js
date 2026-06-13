@@ -161,7 +161,7 @@ export const bands = [
   },
   {
     id: 7,
-    name: "Yanrong",
+    name: "降什麼Key Lah",
     genre: "MANDOPOP",
     members: {
       zh: "Vocal: Yanrong ／ Guitar: Brian ／ Drum: Jason",
