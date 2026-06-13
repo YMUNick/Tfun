@@ -163,6 +163,8 @@ export const bands = [
     id: 7,
     name: "降什麼Key Lah",
     genre: "MANDOPOP",
+    homeImage: "whatkey.jpg",
+    images: ["whatkey.jpg"],
     members: {
       zh: "Vocal: Yanrong ／ Guitar: Brian ／ Drum: Jason",
       en: "Vocal: Yanrong / Guitar: Brian / Drum: Jason",
