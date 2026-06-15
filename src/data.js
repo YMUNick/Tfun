@@ -180,7 +180,7 @@ export const bands = [
       zh: "Vocal: Jamie ／ Guitar: Darren ／ Drum: Aries",
       en: "Vocal: Jamie / Guitar: Darren / Drum: Aries",
     },
-    songs: [],
+    songs: ["Creep", "傷痕", "Fall in love alone"],
     color: "#FFFF00",
   },
 ];
