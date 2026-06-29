@@ -187,11 +187,12 @@ export const bands = [
     id: 9,
     name: "LB Violin Sisters",
     genre: "STRINGS",
+    images: ["Violin.jpeg"],
     members: {
       zh: "敬請期待",
       en: "Coming soon",
     },
-    songs: [],
+    songs: ["CaseyJones", "Let it go"],
     color: "#00E5FF",
   },
   {
