@@ -192,7 +192,7 @@ export const bands = [
       zh: "敬請期待",
       en: "Coming soon",
     },
-    songs: ["CaseyJones", "Let it go"],
+    songs: ["Casey Jones", "Let it go"],
     color: "#00E5FF",
   },
   {
