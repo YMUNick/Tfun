@@ -493,7 +493,7 @@ export default function TFunFestival() {
       }}>
         <div style={{ maxWidth: 900, width: "100%" }}>
           <img
-            src={import.meta.env.BASE_URL + "tfunpost.PNG"}
+            src={import.meta.env.BASE_URL + "tfunpost.png"}
             alt="T FUN 音樂祭海報"
             style={{
               width: "100%",
