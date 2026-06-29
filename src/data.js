@@ -78,7 +78,7 @@ export const i18n = {
 export const bands = [
   {
     id: 1,
-    name: "Vivian",
+    name: "VINKH JAMMING 果醬樂隊",
     genre: "M-POP / J-ROCK",
     images: ["Kaho.jpeg", "Nick.jpg"],
     members: {
@@ -107,7 +107,7 @@ export const bands = [
   },
   {
     id: 3,
-    name: "Frida",
+    name: "AFteR",
     genre: "MANDOPOP",
     images: ["Aries.jpeg", "Frida.jpeg", "RueiYi.jpeg"],
     members: {
@@ -135,7 +135,7 @@ export const bands = [
     name: "Grace後援會",
     genre: "STRINGS",
     duration: 20,
-    images: ["Swenson.jpg"],
+    images: ["Swenson.jpg", "GraceClub.jpg"],
     members: {
       zh: "頌缽：Jinghan ／ Grace ／ Swenson ／ Greta",
       en: "Singing Bowl: Jinghan / Grace / Swenson / Greta",
@@ -174,7 +174,7 @@ export const bands = [
   },
   {
     id: 2,
-    name: "Jamie",
+    name: "Jamie Band",
     genre: "MANDOPOP",
     members: {
       zh: "Vocal: Jamie ／ Guitar: Darren ／ Drum: Aries",
@@ -182,6 +182,28 @@ export const bands = [
     },
     songs: ["Creep", "傷痕", "Fall in love alone"],
     color: "#FFFF00",
+  },
+  {
+    id: 9,
+    name: "LB Violin Sisters",
+    genre: "STRINGS",
+    members: {
+      zh: "敬請期待",
+      en: "Coming soon",
+    },
+    songs: [],
+    color: "#00E5FF",
+  },
+  {
+    id: 10,
+    name: "One Tannery 壹號皮革廠",
+    genre: "BAND",
+    members: {
+      zh: "敬請期待",
+      en: "Coming soon",
+    },
+    songs: [],
+    color: "#FF7A00",
   },
 ];
 
