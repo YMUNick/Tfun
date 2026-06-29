@@ -189,8 +189,8 @@ export const bands = [
     genre: "STRINGS",
     images: ["Violin.jpeg"],
     members: {
-      zh: "敬請期待",
-      en: "Coming soon",
+      zh: "Lorraire ／ Bella",
+      en: "Lorraire / Bella",
     },
     songs: ["Casey Jones", "Let it go"],
     color: "#00E5FF",
