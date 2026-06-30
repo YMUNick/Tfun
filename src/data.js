@@ -132,7 +132,7 @@ export const bands = [
   },
   {
     id: 5,
-    name: "Grace後援會",
+    name: "神秘三角洲",
     genre: "STRINGS",
     duration: 20,
     images: ["Swenson.jpg", "GraceClub.jpg"],
