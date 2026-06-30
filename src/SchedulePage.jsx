@@ -49,6 +49,9 @@ export default function SchedulePage() {
   return (
     <div style={{ minHeight: "100vh", background: "var(--black)", color: "var(--white)" }}>
       <style>{`
+        .schedule-list {
+          perspective: 1200px;
+        }
         .schedule-row {
           border-bottom: 1px solid rgba(255,255,255,0.08);
           transition: background 0.3s ease;
@@ -60,6 +63,32 @@ export default function SchedulePage() {
         }
         .schedule-row:hover {
           background: rgba(255,255,255,0.03);
+        }
+        .schedule-row.flip-in {
+          transform-origin: top center;
+          backface-visibility: hidden;
+          opacity: 0;
+          animation: rowFlipIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes rowFlipIn {
+          0% {
+            opacity: 0;
+            transform: rotateX(-85deg);
+          }
+          60% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 1;
+            transform: rotateX(0deg);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .schedule-row.flip-in {
+            animation: none;
+            opacity: 1;
+            transform: none;
+          }
         }
         @media (max-width: 768px) {
           .schedule-row {
@@ -144,9 +173,13 @@ export default function SchedulePage() {
 
       {/* SCHEDULE LIST */}
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 32px 120px" }}>
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-          {schedule.map((band) => (
-            <div key={band.id} className="schedule-row">
+        <div className="schedule-list" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+          {schedule.map((band, i) => (
+            <div
+              key={band.id}
+              className="schedule-row flip-in"
+              style={{ animationDelay: `${i * 0.12}s` }}
+            >
               {/* Order number */}
               <span style={{
                 fontFamily: "var(--font-mono)",
