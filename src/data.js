@@ -135,7 +135,7 @@ export const bands = [
     name: "神秘三角洲",
     genre: "STRINGS",
     duration: 20,
-    images: ["Swenson.jpg", "GraceClub.jpg"],
+    images: ["GraceClub.jpg", "Swenson.jpg"],
     members: {
       zh: "頌缽：Jinghan ／ Grace ／ Swenson",
       en: "Singing Bowl: Jinghan / Grace / Swenson",

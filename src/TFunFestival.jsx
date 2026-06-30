@@ -2,6 +2,55 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { i18n, bands, staff, noiseSVG } from "./data";
 
+// ─── Carousel timing ───
+// First photo of each band lingers longer, the rest rotate normally.
+const FIRST_HOLD = 10; // seconds the first photo stays
+const OTHER_HOLD = 3;  // seconds each subsequent photo stays
+const FADE = 0.8;      // crossfade duration (seconds)
+
+const carouselTotal = (n) => FIRST_HOLD + (n - 1) * OTHER_HOLD;
+
+// Build per-(image-count, position) keyframes so the first slot is long and
+// the rest are equal, with a crossfade that wraps cleanly around the loop.
+const carouselCss = () => {
+  const counts = new Set(
+    bands
+      .filter((b) => b.images && !b.homeImage && b.images.length > 1)
+      .map((b) => b.images.length)
+  );
+  let css = "";
+  counts.forEach((n) => {
+    const T = carouselTotal(n);
+    const pct = (s) => `${((s / T) * 100).toFixed(3)}%`;
+    for (let i = 0; i < n; i++) {
+      const hold = i === 0 ? FIRST_HOLD : OTHER_HOLD;
+      const start = i === 0 ? 0 : FIRST_HOLD + (i - 1) * OTHER_HOLD;
+      let frames;
+      if (i === n - 1) {
+        // Last image: carry opacity across the loop boundary and fade out at the wrap.
+        frames =
+          `0%{opacity:1}` +
+          `${pct(FADE)}{opacity:0}` +
+          `${pct(start)}{opacity:0}` +
+          `${pct(start + FADE)}{opacity:1}` +
+          `100%{opacity:1}`;
+      } else {
+        frames =
+          `0%{opacity:0}` +
+          `${pct(start)}{opacity:0}` +
+          `${pct(start + FADE)}{opacity:1}` +
+          `${pct(start + hold)}{opacity:1}` +
+          `${pct(start + hold + FADE)}{opacity:0}` +
+          `100%{opacity:0}`;
+      }
+      css += `@keyframes carousel-n${n}-i${i}{${frames}}`;
+    }
+  });
+  return css;
+};
+
+const CAROUSEL_CSS = carouselCss();
+
 export default function TFunFestival() {
   const [lang, setLang] = useState(() => localStorage.getItem("tfun-lang") || "zh");
   const t = i18n[lang];
@@ -77,6 +126,7 @@ export default function TFunFestival() {
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--white)", color: "var(--black)" }}>
+      <style>{CAROUSEL_CSS}</style>
 
       {/* ─── NAV ─── */}
       <nav
@@ -403,7 +453,9 @@ export default function TFunFestival() {
                           position: "absolute", inset: 0,
                           width: "100%", height: "100%",
                           objectFit: "cover",
-                          ...(arr.length > 1 ? { animationDelay: `${i * (6 / arr.length)}s` } : {}),
+                          ...(arr.length > 1
+                            ? { animation: `carousel-n${arr.length}-i${i} ${carouselTotal(arr.length)}s infinite` }
+                            : {}),
                         }}
                       />
                     ))}
