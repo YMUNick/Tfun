@@ -2,14 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { i18n, bands } from "./data";
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+// Official performance order (by band id)
+const performanceOrder = [5, 6, 9, 2, 3, 4, 7, 1, 8, 10];
 
 export default function SchedulePage() {
   const [lang, setLang] = useState(() => localStorage.getItem("tfun-lang") || "zh");
@@ -26,13 +20,15 @@ export default function SchedulePage() {
   const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
 
   const schedule = useMemo(() => {
-    const shuffled = shuffle(bands);
+    const ordered = performanceOrder
+      .map((id) => bands.find((b) => b.id === id))
+      .filter(Boolean);
     const startHour = 14;
     const startMinute = 0;
     const defaultDuration = 25;
     let elapsed = 0;
 
-    return shuffled.map((band, i) => {
+    return ordered.map((band, i) => {
       const totalMinutes = startHour * 60 + startMinute + elapsed;
       const duration = band.duration || defaultDuration;
       elapsed += duration;
