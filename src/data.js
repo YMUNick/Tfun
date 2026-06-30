@@ -137,8 +137,8 @@ export const bands = [
     duration: 20,
     images: ["Swenson.jpg", "GraceClub.jpg"],
     members: {
-      zh: "頌缽：Jinghan ／ Grace ／ Swenson ／ Greta",
-      en: "Singing Bowl: Jinghan / Grace / Swenson / Greta",
+      zh: "頌缽：Jinghan ／ Grace ／ Swenson",
+      en: "Singing Bowl: Jinghan / Grace / Swenson",
     },
     songs: ["島嶼共振：頌缽鳴心 (Island Resonance)"],
     color: "#00FFFF",
