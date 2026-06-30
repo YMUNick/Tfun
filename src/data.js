@@ -80,7 +80,7 @@ export const bands = [
     id: 1,
     name: "VINKH JAMMING 果醬樂隊",
     genre: "M-POP / J-ROCK",
-    images: ["Kaho.jpeg", "Nick.jpg", "Vivian.jpg"],
+    images: ["VINKH.png", "Kaho.jpeg", "Nick.jpg", "Vivian.jpg"],
     members: {
       zh: "Vocal: Nick ／ Guitar: Kaho ／ Drum: Vivian",
       en: "Vocal: Nick / Guitar: Kaho / Drum: Vivian",
