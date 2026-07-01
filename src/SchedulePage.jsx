@@ -178,7 +178,7 @@ export default function SchedulePage() {
             <div
               key={band.id}
               className="schedule-row flip-in"
-              style={{ animationDelay: `${i * 0.12}s` }}
+              style={{ animationDelay: `${i * 0.45}s` }}
             >
               {/* Order number */}
               <span style={{

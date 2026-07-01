@@ -177,8 +177,8 @@ export const bands = [
     name: "Jamie Band",
     genre: "MANDOPOP",
     members: {
-      zh: "Vocal: Jamie ／ Guitar: Darren ／ Drum: Aries",
-      en: "Vocal: Jamie / Guitar: Darren / Drum: Aries",
+      zh: "Vocal: Jamie ／ Guitar: Darren ／ Bass: Jason ／ Drum: Aries",
+      en: "Vocal: Jamie / Guitar: Darren / Bass: Jason / Drum: Aries",
     },
     songs: ["Creep", "傷痕", "Fall in love alone"],
     color: "#FFFF00",
