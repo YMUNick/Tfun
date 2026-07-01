@@ -166,8 +166,8 @@ export const bands = [
     homeImage: "whatkey.jpg",
     images: ["whatkey.jpg"],
     members: {
-      zh: "Vocal: Yanrong ／ Guitar: Brian ／ Drum: Jason ／ Bass: John",
-      en: "Vocal: Yanrong / Guitar: Brian / Drum: Jason / Bass: John",
+      zh: "Vocal: Yanrong ／ Guitar: Brian ／ Keyboard: 00 ／ Drum: Jason ／ Bass: John",
+      en: "Vocal: Yanrong / Guitar: Brian / Keyboard: 00 / Drum: Jason / Bass: John",
     },
     songs: ["A-Lin - 摯友", "理想混蛋 - 不是因為天氣晴朗才愛你", "F.I.R - 月牙灣"],
     color: "#39FF14",
