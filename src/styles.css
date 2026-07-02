@@ -126,93 +126,72 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
   pointer-events: none; z-index: 0;
 }
 
-/* ─── Horizontal scroll (home) ─── */
-.scroll-strip {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  cursor: grab;
+/* ─── Lineup grid (home) ─── */
+.lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  max-width: 1280px;
+  margin: 0 auto;
   padding: 0 24px;
+  perspective: 1200px;
 }
-.scroll-strip:active { cursor: grabbing; }
-.scroll-strip::-webkit-scrollbar { display: none; }
 
-.scroll-card {
-  flex: 0 0 280px;
-  height: 420px;
-  scroll-snap-align: start;
+.lineup-card {
   position: relative;
   overflow: hidden;
-  border-right: 1px solid rgba(255,255,255,0.08);
-  transition: flex 0.4s ease;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
   color: var(--white);
+  opacity: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/* Reveal one-by-one when the section scrolls into view */
+.lineup-grid.revealed .lineup-card {
+  animation: lineupCardReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes lineupCardReveal {
+  from { opacity: 0; transform: translateY(28px) rotateX(-10deg); }
+  to   { opacity: 1; transform: translateY(0) rotateX(0deg); }
+}
+.lineup-card:hover,
+.lineup-card:focus-visible {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 22px 55px rgba(0,0,0,0.55);
+}
+
 /* ─── Carousel crossfade ─── */
 .carousel-img {
   opacity: 0;
   /* animation set inline per image (see TFunFestival carousel keyframes) */
 }
 
-.scroll-card:last-child { border-right: none; }
-.scroll-card:hover {
-  flex: 0 0 340px;
-}
-.scroll-card-inner {
+.lineup-card-inner {
   height: 100%;
-  padding: 40px 32px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   position: relative;
-  z-index: 1;
-  min-height: 420px;
+  z-index: 2;
 }
 
-/* ─── Scroll arrows ─── */
-.scroll-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
-  color: var(--white);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.25s ease;
-}
-.scroll-arrow:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.4);
-  transform: translateY(-50%) scale(1.1);
-}
-.scroll-arrow-left {
-  left: 12px;
-}
-.scroll-arrow-right {
-  right: 12px;
+@media (prefers-reduced-motion: reduce) {
+  .lineup-card { opacity: 1; }
+  .lineup-grid.revealed .lineup-card { animation: none; }
+  .lineup-card:hover,
+  .lineup-card:focus-visible { transform: none; }
 }
 
-@media (max-width: 480px) {
-  .scroll-arrow {
-    width: 36px;
-    height: 36px;
+@media (max-width: 640px) {
+  .lineup-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 16px;
   }
-  .scroll-arrow svg {
-    width: 16px;
-    height: 16px;
-  }
+  .lineup-card-inner { padding: 20px 16px; }
 }
 
 /* ─── Mobile menu ─── */
@@ -288,16 +267,10 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
   .bands-grid { grid-template-columns: 1fr !important; }
   .info-grid { grid-template-columns: 1fr !important; }
   .credits-list { flex-direction: column !important; align-items: center !important; }
-  .scroll-card { flex: 0 0 240px; }
-  .scroll-card:hover { flex: 0 0 280px; }
-  .scroll-card-inner { min-height: 360px; padding: 32px 24px; }
 }
 @media (max-width: 480px) {
   .hero-title { font-size: 42px !important; }
   .hero-subtitle { font-size: 22px !important; }
-  .scroll-card { flex: 0 0 200px; }
-  .scroll-card:hover { flex: 0 0 240px; }
-  .scroll-card-inner { min-height: 320px; padding: 24px 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

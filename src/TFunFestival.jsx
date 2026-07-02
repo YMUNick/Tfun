@@ -58,9 +58,6 @@ export default function TFunFestival() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState(new Set());
   const sectionRefs = useRef({});
-  const scrollRef = useRef(null);
-  const isDragging = useRef(false);
-  const dragStart = useRef({ x: 0, scrollLeft: 0 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -90,23 +87,6 @@ export default function TFunFestival() {
     );
     Object.values(sectionRefs.current).forEach((ref) => ref && observer.observe(ref));
     return () => observer.disconnect();
-  }, []);
-
-  // Drag-to-scroll for the horizontal strip
-  const onMouseDown = useCallback((e) => {
-    isDragging.current = true;
-    dragStart.current = { x: e.pageX, scrollLeft: scrollRef.current.scrollLeft };
-    scrollRef.current.style.cursor = "grabbing";
-  }, []);
-  const onMouseMove = useCallback((e) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const dx = e.pageX - dragStart.current.x;
-    scrollRef.current.scrollLeft = dragStart.current.scrollLeft - dx;
-  }, []);
-  const onMouseUp = useCallback(() => {
-    isDragging.current = false;
-    if (scrollRef.current) scrollRef.current.style.cursor = "grab";
   }, []);
 
   const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
@@ -400,44 +380,15 @@ export default function TFunFestival() {
           <h2 className="section-title" style={{ color: "var(--white)" }}>{t.lineup.sectionTitle}</h2>
         </div>
 
-        <div style={{ position: "relative" }}>
-          {/* Left arrow */}
-          <button
-            className="scroll-arrow scroll-arrow-left"
-            onClick={() => { scrollRef.current.scrollBy({ left: -320, behavior: "smooth" }); }}
-            aria-label="Scroll left"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-          </button>
-
-          {/* Right arrow */}
-          <button
-            className="scroll-arrow scroll-arrow-right"
-            onClick={() => { scrollRef.current.scrollBy({ left: 320, behavior: "smooth" }); }}
-            aria-label="Scroll right"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
-          </button>
-
-          <div
-            ref={scrollRef}
-            className="scroll-strip"
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={onMouseUp}
-            onMouseLeave={onMouseUp}
-          >
-            {bands.map((band) => (
+        <div className={`lineup-grid ${visibleSections.has("lineup") ? "revealed" : ""}`}>
+            {bands.map((band, idx) => (
               <Link
                 key={band.id}
                 to={`/lineup?band=${band.id}`}
-                className="scroll-card"
+                className="lineup-card"
+                aria-label={band.name}
                 draggable={false}
-                onClick={(e) => { if (isDragging.current) e.preventDefault(); }}
+                style={{ animationDelay: `${idx * 0.05}s` }}
               >
                 {/* Background: photo carousel or color gradient */}
                 {band.images ? (
@@ -477,7 +428,7 @@ export default function TFunFestival() {
                   height: 3, background: band.color,
                 }} />
 
-                <div className="scroll-card-inner">
+                <div className="lineup-card-inner">
                   {/* Genre pill */}
                   <span style={{
                     fontFamily: "var(--font-mono)",
@@ -494,11 +445,11 @@ export default function TFunFestival() {
                   {/* Band name */}
                   <h3 style={{
                     fontFamily: "var(--font-sans)",
-                    fontSize: "clamp(32px, 5vw, 44px)",
+                    fontSize: "clamp(22px, 2.2vw, 32px)",
                     fontWeight: 700,
                     letterSpacing: "-0.5px",
-                    lineHeight: 1.05,
-                    marginBottom: 12,
+                    lineHeight: 1.1,
+                    marginBottom: 10,
                     color: "var(--white)",
                   }}>
                     {band.name}
@@ -518,7 +469,6 @@ export default function TFunFestival() {
                 </div>
               </Link>
             ))}
-          </div>
         </div>
 
         {/* View full lineup CTA */}
