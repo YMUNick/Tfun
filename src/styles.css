@@ -161,6 +161,14 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 22px 55px rgba(0,0,0,0.55);
 }
+/* Photo zooms slightly on hover (card clips the overflow) */
+.lineup-card img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lineup-card:hover img,
+.lineup-card:focus-visible img {
+  transform: scale(1.08);
+}
 
 /* ─── Carousel crossfade ─── */
 .carousel-img {
@@ -183,6 +191,8 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
   .lineup-grid.revealed .lineup-card { animation: none; }
   .lineup-card:hover,
   .lineup-card:focus-visible { transform: none; }
+  .lineup-card:hover img,
+  .lineup-card:focus-visible img { transform: none; }
 }
 
 @media (max-width: 640px) {
