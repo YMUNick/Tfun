@@ -286,7 +286,7 @@ export default function TFunFestival() {
             color: "var(--white)", opacity: 0.8, marginBottom: 24,
             animation: "fadeInUp 0.8s ease both",
           }}>
-            2026.07.25 — GR.ID SINGAPORE
+            2026.07.25 — GR.ID SINGAPORE (CLUB MIAMI)
           </div>
 
           <h1

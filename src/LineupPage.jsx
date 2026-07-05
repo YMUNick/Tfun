@@ -174,7 +174,7 @@ export default function LineupPage() {
         <span className="mono-label" style={{
           display: "block", marginBottom: 20, color: "var(--white)", opacity: 0.3,
         }}>
-          2026.07.25 — GR.ID SINGAPORE
+          2026.07.25 — GR.ID SINGAPORE (CLUB MIAMI)
         </span>
         <h1 style={{
           fontFamily: "var(--font-sans)",
