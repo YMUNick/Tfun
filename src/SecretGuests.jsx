@@ -6,6 +6,15 @@ const BASE = import.meta.env.BASE_URL;
 
 const guests = [
   {
+    name: "Lefthand Drive",
+    nameEn: "Lefthand Drive",
+    genre: "ROCK",
+    color: "#FF2E00",
+    image: BASE + "lefthanddrive.jpg",
+    tag: "火爆天團",
+    tagEn: "Red-Hot Band",
+  },
+  {
     name: "五月天",
     nameEn: "Mayday",
     genre: "ROCK",

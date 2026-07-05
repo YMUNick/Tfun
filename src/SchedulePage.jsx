@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { i18n, bands } from "./data";
 
 // Official performance order (by band id)
-const performanceOrder = [5, 6, 9, 2, 3, 4, 7, 1, 8, 10];
+const performanceOrder = [5, 6, 9, 2, 4, 3, 1, 7, 8, 11, 10];
 
 export default function SchedulePage() {
   const [lang, setLang] = useState(() => localStorage.getItem("tfun-lang") || "zh");

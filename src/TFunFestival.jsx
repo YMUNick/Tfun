@@ -381,7 +381,7 @@ export default function TFunFestival() {
         </div>
 
         <div className={`lineup-grid ${visibleSections.has("lineup") ? "revealed" : ""}`}>
-            {bands.map((band, idx) => (
+            {bands.filter((b) => !b.secret).map((band, idx) => (
               <Link
                 key={band.id}
                 to={`/lineup?band=${band.id}`}

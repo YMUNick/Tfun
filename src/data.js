@@ -206,6 +206,18 @@ export const bands = [
     songs: [],
     color: "#FF7A00",
   },
+  {
+    id: 11,
+    name: "Lefthand Drive",
+    genre: "ROCK",
+    secret: true,
+    members: {
+      zh: "火爆天團",
+      en: "Red-Hot Band",
+    },
+    songs: [],
+    color: "#FF2E00",
+  },
 ];
 
 export const staff = [

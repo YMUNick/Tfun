@@ -193,14 +193,14 @@ export default function LineupPage() {
           letterSpacing: "1px",
           textTransform: "uppercase",
         }}>
-          {bands.length} ARTISTS / GROUPS
+          {bands.filter((b) => !b.secret).length} ARTISTS / GROUPS
         </p>
       </header>
 
       {/* ARTIST LIST */}
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px 120px" }}>
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-          {bands.map((band, i) => {
+          {bands.filter((b) => !b.secret).map((band, i) => {
             const isOpen = expandedId === band.id;
             return (
               <div
