@@ -174,7 +174,7 @@ export const bands = [
   },
   {
     id: 2,
-    name: "Jamie Band",
+    name: "Jamiee & the Homies",
     genre: "MANDOPOP",
     members: {
       zh: "Vocal: Jamie ／ Guitar: Darren ／ Bass: Jason ／ Drum: Aries",
@@ -212,8 +212,8 @@ export const bands = [
     genre: "ROCK",
     secret: true,
     members: {
-      zh: "火爆天團",
-      en: "Red-Hot Band",
+      zh: "Vocal: Nick ／ Bass: Wei ／ Guitar: CY ／ Drum: Vijay",
+      en: "Vocal: Nick / Bass: Wei / Guitar: CY / Drum: Vijay",
     },
     songs: [],
     color: "#FF2E00",
