@@ -58,6 +58,7 @@ export default function TFunFestival() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState(new Set());
   const sectionRefs = useRef({});
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -86,6 +87,27 @@ export default function TFunFestival() {
       { threshold: 0.2 }
     );
     Object.values(sectionRefs.current).forEach((ref) => ref && observer.observe(ref));
+    return () => observer.disconnect();
+  }, []);
+
+  // Auto-play the banner video once when it scrolls into view
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    let played = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !played) {
+            played = true;
+            vid.play().catch(() => {});
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(vid);
     return () => observer.disconnect();
   }, []);
 
@@ -531,6 +553,27 @@ export default function TFunFestival() {
               {t.info.sectionLabel}
             </span>
             <h2 className="section-title" style={{ color: "var(--white)" }}>{t.info.sectionTitle}</h2>
+          </div>
+
+          {/* ─── BANNER VIDEO (auto-plays once when scrolled into view) ─── */}
+          <div style={{
+            maxWidth: 900,
+            margin: "0 auto 64px",
+            borderRadius: 16,
+            overflow: "hidden",
+            border: "1px solid rgba(255,255,255,0.08)",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
+            lineHeight: 0,
+          }}>
+            <video
+              ref={videoRef}
+              src={import.meta.env.BASE_URL + "bannervideo.mp4"}
+              muted
+              playsInline
+              controls
+              preload="metadata"
+              style={{ width: "100%", height: "auto", display: "block" }}
+            />
           </div>
 
           <div
