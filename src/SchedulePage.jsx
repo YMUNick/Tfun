@@ -20,9 +20,20 @@ export default function SchedulePage() {
   const toggleLang = () => setLang((l) => (l === "zh" ? "en" : "zh"));
 
   const schedule = useMemo(() => {
-    const ordered = performanceOrder
-      .map((id) => bands.find((b) => b.id === id))
-      .filter(Boolean);
+    const opening = {
+      id: "opening",
+      name: lang === "zh" ? "開場 - 青商會致詞" : "Opening - JCI Address",
+      genre: "OPENING",
+      duration: 10,
+      members: { zh: "", en: "" },
+      color: "#FFD700",
+    };
+    const ordered = [
+      opening,
+      ...performanceOrder
+        .map((id) => bands.find((b) => b.id === id))
+        .filter(Boolean),
+    ];
     const startHour = 14;
     const startMinute = 0;
     const defaultDuration = 25;
@@ -44,7 +55,7 @@ export default function SchedulePage() {
         endTime: `${String(eh).padStart(2, "0")}:${String(em).padStart(2, "0")}`,
       };
     });
-  }, []);
+  }, [lang]);
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--black)", color: "var(--white)" }}>
