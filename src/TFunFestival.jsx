@@ -90,24 +90,27 @@ export default function TFunFestival() {
     return () => observer.disconnect();
   }, []);
 
-  // Auto-play the banner video once when it scrolls into view
+  // Auto-play the banner video once when it scrolls into view.
+  // The YouTube iframe has no src until visible; on first intersection we
+  // load it with autoplay+mute (browsers require mute for scroll-triggered play).
   useEffect(() => {
-    const vid = videoRef.current;
-    if (!vid) return;
+    const frame = videoRef.current;
+    if (!frame) return;
     let played = false;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !played) {
             played = true;
-            vid.play().catch(() => {});
+            frame.src =
+              "https://www.youtube.com/embed/h4qiEC7w9ko?autoplay=1&mute=1&playsinline=1&rel=0";
             observer.disconnect();
           }
         });
       },
       { threshold: 0.4 }
     );
-    observer.observe(vid);
+    observer.observe(frame);
     return () => observer.disconnect();
   }, []);
 
@@ -563,16 +566,16 @@ export default function TFunFestival() {
             overflow: "hidden",
             border: "1px solid rgba(255,255,255,0.08)",
             boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
-            lineHeight: 0,
+            position: "relative",
+            aspectRatio: "16 / 9",
+            background: "#000",
           }}>
-            <video
+            <iframe
               ref={videoRef}
-              src={import.meta.env.BASE_URL + "bannervideo.mp4"}
-              muted
-              playsInline
-              controls
-              preload="metadata"
-              style={{ width: "100%", height: "auto", display: "block" }}
+              title="T FUN banner video"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
             />
           </div>
 
