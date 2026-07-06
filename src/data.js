@@ -122,7 +122,7 @@ export const bands = [
     name: "歹灣郎宮廟總會",
     genre: "DANCE",
     duration: 10,
-    images: ["dancingclub.png", "sun.jpg", "Lynn.jpg"],
+    images: ["dancingclub.png", "temple1.jpg", "temple2.jpg", "sun.jpg", "Lynn.jpg"],
     members: {
       zh: "YuFeng ／ 安 ／ Dio ／ Lynn ／ Ty ／ Winney ／ Sun ／ 得瑋 — 熱舞社",
       en: "Yu-Feng / An / Dio / Lynn / Ty / Winney / Sun / De-Wei — Dance Crew",
