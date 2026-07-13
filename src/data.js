@@ -147,7 +147,7 @@ export const bands = [
     id: 6,
     name: "PASH",
     genre: "ORIGINAL",
-    images: ["PASH.png"],
+    images: ["PASH.jpeg"],
     members: {
       zh: "Vocal: PASH ／ Guitar: Kaho",
       en: "Vocal: PASH / Guitar: Kaho",
@@ -163,8 +163,8 @@ export const bands = [
     id: 7,
     name: "降什麼Key Lah",
     genre: "MANDOPOP",
-    homeImage: "whatkey.jpg",
-    images: ["whatkey.jpg"],
+    homeImage: "whatkey.jpeg",
+    images: ["whatkey.jpeg"],
     members: {
       zh: "Vocal: Yanrong ／ Guitar: Brian ／ Keyboard: 00 ／ Drum: Jason ／ Bass: John",
       en: "Vocal: Yanrong / Guitar: Brian / Keyboard: 00 / Drum: Jason / Bass: John",
