@@ -149,8 +149,8 @@ export const bands = [
     genre: "ORIGINAL",
     images: ["PASH.jpeg"],
     members: {
-      zh: "Vocal: PASH ／ Guitar: Kaho",
-      en: "Vocal: PASH / Guitar: Kaho",
+      zh: "Vocal: PASH",
+      en: "Vocal: PASH",
     },
     songs: [
       "我是一隻鹹魚嗎？ Am I a Salted Fish?",
