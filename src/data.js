@@ -204,7 +204,7 @@ export const bands = [
       zh: "Keyboard: Owenn ／ Drums: Mike ／ Guitar: Will ／ Bass: Kaijie ／ Vocal: Chiu Yie ／ Vocal: Weiwei",
       en: "Keyboard: Owenn / Drums: Mike / Guitar: Will / Bass: Kaijie / Vocal: Chiu Yie / Vocal: Weiwei",
     },
-    songs: ["愛你", "突然好像你 MASH UP 想見你", "山海"],
+    songs: ["愛你", "突然好想你 MASH UP 想見你", "山海"],
     color: "#FF7A00",
   },
   {
