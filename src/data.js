@@ -149,8 +149,8 @@ export const bands = [
     genre: "ORIGINAL",
     images: ["PASH.jpeg"],
     members: {
-      zh: "Vocal: PASH",
-      en: "Vocal: PASH",
+      zh: "Vocal: PASH ／ Guitar: Hui Shi 慧詩",
+      en: "Vocal: PASH / Guitar: Hui Shi",
     },
     songs: [
       "我是一隻鹹魚嗎？ Am I a Salted Fish?",
