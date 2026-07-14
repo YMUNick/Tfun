@@ -154,7 +154,7 @@ export const bands = [
     },
     songs: [
       "我是一隻鹹魚嗎？ Am I a Salted Fish?",
-      "有時 Sometimes",
+      "Every Day is A Good Day",
       "揮霍 Squandering",
     ],
     color: "#FF6600",
