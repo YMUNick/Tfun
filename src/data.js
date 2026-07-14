@@ -199,6 +199,7 @@ export const bands = [
     id: 10,
     name: "One Tannery 壹號皮革廠",
     genre: "BAND",
+    images: ["one.jpeg"],
     members: {
       zh: "Keyboard: Owenn ／ Drums: Mike ／ Guitar: Will ／ Bass: Kaijie ／ Vocal: Chiu Yie ／ Vocal: Weiwei",
       en: "Keyboard: Owenn / Drums: Mike / Guitar: Will / Bass: Kaijie / Vocal: Chiu Yie / Vocal: Weiwei",
