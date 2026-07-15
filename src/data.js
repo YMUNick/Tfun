@@ -212,6 +212,7 @@ export const bands = [
     name: "Lefthand Drive",
     genre: "ROCK",
     secret: true,
+    images: ["nightdrive.png"],
     members: {
       zh: "Vocal: Nick ／ Bass: Wei ／ Guitar: CY ／ Drum: Vijay",
       en: "Vocal: Nick / Bass: Wei / Guitar: CY / Drum: Vijay",
