@@ -176,6 +176,7 @@ export const bands = [
     id: 2,
     name: "Jamiee & the Homies",
     genre: "MANDOPOP",
+    images: ["JAMIE.jpeg"],
     members: {
       zh: "Vocal: Jamie ／ Guitar: Darren ／ Bass: Jason ／ Drum: Aries",
       en: "Vocal: Jamie / Guitar: Darren / Bass: Jason / Drum: Aries",
