@@ -95,26 +95,35 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
   pointer-events: none;
 }
 
-.tfun-intro-img {
+/* Flex wrapper centers the photo independently of its load/decode timing,
+   so the animation only has to move it up + shrink (no translate(-50%) that
+   depends on the image's own size). */
+.tfun-intro-imgwrap {
   position: absolute;
-  left: 50%;
-  top: 50%;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.tfun-intro-img {
   width: min(90vw, 760px);
   max-height: 74vh;
   object-fit: contain;
   border-radius: 10px;
   box-shadow: 0 24px 90px rgba(0, 0, 0, 0.6);
   opacity: 0;
-  transform: translateX(-50%) translateY(-50%) scale(1.02);
+  transform: translateY(0) scale(1.02);
   animation: tfunIntroImg 17s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes tfunIntroImg {
-  0%   { opacity: 0; transform: translateX(-50%) translateY(-50%) scale(1.03); }
-  11%  { opacity: 1; transform: translateX(-50%) translateY(-50%) scale(1); }
-  24%  { opacity: 1; transform: translateX(-50%) translateY(-50%) scale(1); }
-  56%  { opacity: 1; transform: translateX(-50%) translateY(calc(-50% - 27vh)) scale(0.62); }
-  100% { opacity: 1; transform: translateX(-50%) translateY(calc(-50% - 27vh)) scale(0.62); }
+  0%   { opacity: 0; transform: translateY(0) scale(1.03); }
+  11%  { opacity: 1; transform: translateY(0) scale(1); }
+  24%  { opacity: 1; transform: translateY(0) scale(1); }
+  56%  { opacity: 1; transform: translateY(-27vh) scale(0.62); }
+  100% { opacity: 1; transform: translateY(-27vh) scale(0.62); }
 }
 
 .tfun-intro-text {

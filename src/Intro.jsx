@@ -56,12 +56,14 @@ export default function Intro() {
       role="dialog"
       aria-label="開場致謝"
     >
-      <img
-        src={import.meta.env.BASE_URL + "TfunGroup.jpg"}
-        alt="T Fun 全體大合照"
-        className="tfun-intro-img"
-        draggable={false}
-      />
+      <div className="tfun-intro-imgwrap">
+        <img
+          src={import.meta.env.BASE_URL + "TfunGroup.jpg"}
+          alt="T Fun 全體大合照"
+          className="tfun-intro-img"
+          draggable={false}
+        />
+      </div>
 
       <div className="tfun-intro-text">
         {lines.map((line, i) => (
