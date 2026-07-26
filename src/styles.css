@@ -196,8 +196,17 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
 }
 
 @media (max-width: 640px) {
-  .tfun-intro-img { width: 94vw; max-height: 58vh; }
-  .tfun-intro-text { top: 50%; gap: 16px; }
+  .tfun-intro-img { width: 94vw; max-height: 44vh; }
+  /* Anchor captions to the bottom so long lines grow upward and never get
+     clipped off the bottom of the screen. */
+  .tfun-intro-text {
+    top: auto;
+    bottom: calc(4% + env(safe-area-inset-bottom, 0px));
+    gap: 12px;
+    padding: 0 22px;
+  }
+  .tfun-intro-line { font-size: 15px; line-height: 1.6; letter-spacing: 0.2px; }
+  .tfun-intro-sign { font-size: 22px; margin-top: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
