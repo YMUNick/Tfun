@@ -5,10 +5,7 @@ import { useState, useEffect, useRef } from "react";
 // upward & shrinks → the dedication lines fade in one after another → the whole
 // overlay fades out to reveal the home page.
 //
-// Plays once per browser session (sessionStorage). To make it play on every
-// load, remove the SEEN_KEY guard below.
-
-const SEEN_KEY = "tfun-intro-seen";
+// Plays once on every page load / reload (skipped under prefers-reduced-motion).
 
 // Timeline (seconds). Keep in sync with the @keyframes in styles.css.
 const LINE_DELAYS = [5.0, 7.2, 9.4, 13.0, 14.6]; // line1..line4 + signature
@@ -28,17 +25,13 @@ export default function Intro() {
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const alreadySeen =
-    typeof window !== "undefined" && sessionStorage.getItem(SEEN_KEY);
-
-  const [show, setShow] = useState(!alreadySeen && !prefersReduced);
+  const [show, setShow] = useState(!prefersReduced);
   const [fadingOut, setFadingOut] = useState(false);
   const timers = useRef([]);
 
   const finish = () => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
-    try { sessionStorage.setItem(SEEN_KEY, "1"); } catch { /* ignore */ }
     setFadingOut(true);
     // allow the fade-out transition to play before unmounting
     setTimeout(() => setShow(false), 1300);
@@ -46,7 +39,6 @@ export default function Intro() {
 
   useEffect(() => {
     if (!show) return;
-    sessionStorage.setItem(SEEN_KEY, "1");
     document.body.style.overflow = "hidden";
     timers.current.push(setTimeout(() => setFadingOut(true), FADE_OUT_AT * 1000));
     timers.current.push(setTimeout(() => setShow(false), DONE_AT * 1000));
