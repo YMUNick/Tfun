@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { i18n, bands, staff, noiseSVG } from "./data";
+import Intro from "./Intro";
 
 // ─── Carousel timing ───
 // First photo of each band lingers longer, the rest rotate normally.
@@ -131,6 +132,7 @@ export default function TFunFestival() {
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--white)", color: "var(--black)" }}>
+      <Intro />
       <style>{CAROUSEL_CSS}</style>
 
       {/* ─── NAV ─── */}
