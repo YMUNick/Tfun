@@ -6,13 +6,13 @@ import { useState, useEffect, useRef } from "react";
 // overlay fades out to reveal the home page.
 //
 // Plays once on every page load / reload (skipped under prefers-reduced-motion).
-// After the intro (or Skip), a short notice popup shows for ~1s before the
+// After the intro (or Skip), a short notice popup shows for ~2s before the
 // home page is revealed. The notice still shows under prefers-reduced-motion.
 
 // Timeline (seconds). Keep in sync with the @keyframes in styles.css.
 const LINE_DELAYS = [5.0, 7.2, 9.4, 13.0, 14.6]; // line1..line4 + signature
 const NOTICE_AT = 16.8;     // intro ends, notice popup appears
-const NOTICE_HOLD = 1.0;    // how long the notice stays fully visible
+const NOTICE_HOLD = 2.0;    // how long the notice stays fully visible
 const NOTICE_FADE = 0.5;    // notice overlay fade-out (match .tfun-notice transition)
 
 const lines = [
