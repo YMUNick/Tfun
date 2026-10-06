@@ -6,11 +6,14 @@ import { useState, useEffect, useRef } from "react";
 // overlay fades out to reveal the home page.
 //
 // Plays once on every page load / reload (skipped under prefers-reduced-motion).
+// After the intro (or Skip), a short notice popup shows for ~1s before the
+// home page is revealed. The notice still shows under prefers-reduced-motion.
 
 // Timeline (seconds). Keep in sync with the @keyframes in styles.css.
 const LINE_DELAYS = [5.0, 7.2, 9.4, 13.0, 14.6]; // line1..line4 + signature
-const FADE_OUT_AT = 16.8;   // overlay starts fading to reveal the page
-const DONE_AT = 18.1;       // overlay unmounts
+const NOTICE_AT = 16.8;     // intro ends, notice popup appears
+const NOTICE_HOLD = 1.0;    // how long the notice stays fully visible
+const NOTICE_FADE = 0.5;    // notice overlay fade-out (match .tfun-notice transition)
 
 const lines = [
   "給：所有參與活動的 T Fun 工作人員與表演者，還有來支持的朋友們。",
@@ -25,34 +28,53 @@ export default function Intro() {
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const [show, setShow] = useState(!prefersReduced);
-  const [fadingOut, setFadingOut] = useState(false);
+  // "intro" → "notice" → "notice-fading" → "done"
+  const [phase, setPhase] = useState(prefersReduced ? "notice" : "intro");
   const timers = useRef([]);
+
+  const later = (fn, sec) => timers.current.push(setTimeout(fn, sec * 1000));
 
   const finish = () => {
     timers.current.forEach(clearTimeout);
     timers.current = [];
-    setFadingOut(true);
-    // allow the fade-out transition to play before unmounting
-    setTimeout(() => setShow(false), 1300);
+    setPhase("notice");
   };
 
+  // Lock page scroll for the whole overlay sequence.
+  const active = phase !== "done";
   useEffect(() => {
-    if (!show) return;
+    if (!active) return;
     document.body.style.overflow = "hidden";
-    timers.current.push(setTimeout(() => setFadingOut(true), FADE_OUT_AT * 1000));
-    timers.current.push(setTimeout(() => setShow(false), DONE_AT * 1000));
     return () => {
       document.body.style.overflow = "";
-      timers.current.forEach(clearTimeout);
     };
-  }, [show]);
+  }, [active]);
 
-  if (!show) return null;
+  useEffect(() => {
+    if (phase === "intro") later(() => setPhase("notice"), NOTICE_AT);
+    if (phase === "notice") later(() => setPhase("notice-fading"), NOTICE_HOLD);
+    if (phase === "notice-fading") later(() => setPhase("done"), NOTICE_FADE);
+  }, [phase]);
+
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+
+  if (phase === "done") return null;
+
+  if (phase !== "intro") {
+    return (
+      <div
+        className={`tfun-notice ${phase === "notice-fading" ? "fading" : ""}`}
+        role="alertdialog"
+        aria-live="assertive"
+      >
+        <div className="tfun-notice-box">工商協會絕無贊助(青商會有唷)</div>
+      </div>
+    );
+  }
 
   return (
     <div
-      className={`tfun-intro ${fadingOut ? "fading" : ""}`}
+      className="tfun-intro"
       role="dialog"
       aria-label="開場致謝"
     >

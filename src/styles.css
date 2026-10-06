@@ -87,12 +87,6 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
   z-index: 1000;
   background: #000;
   overflow: hidden;
-  opacity: 1;
-  transition: opacity 1.2s ease;
-}
-.tfun-intro.fading {
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* Flex wrapper centers the photo independently of its load/decode timing,
@@ -211,6 +205,44 @@ body { font-family: var(--font-sans); background: var(--white); color: var(--bla
 
 @media (prefers-reduced-motion: reduce) {
   .tfun-intro { display: none; }
+}
+
+/* ─── Notice popup (shown ~1s between intro and home page) ─── */
+.tfun-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.tfun-notice.fading {
+  opacity: 0;
+  pointer-events: none;
+}
+.tfun-notice-box {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: clamp(18px, 3.4vw, 28px);
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 22px 34px;
+  border-radius: 14px;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.5);
+  animation: tfunNoticePop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes tfunNoticePop {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tfun-notice-box { animation: none; }
 }
 
 /* ─── Nav ─── */
